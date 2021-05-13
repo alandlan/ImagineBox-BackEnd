@@ -4,5 +4,10 @@
     "host": "localhost",
     "username": "imaginebox",
     "password": "alohomora",
-    "database": "imaginebox"
+    "database": "imaginebox",
+    "migrations": ["./src/database/migrations/*.ts"],
+    "entities": ["./src/modules/**/models/*.ts"],
+    "cli": {
+      "migrationsDir": "./src/database/migrations"
+    }
 }
