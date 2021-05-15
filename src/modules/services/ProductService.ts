@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { Product } from "../models/Product";
 import { IProductRepository } from "../repository/interface/IProductRepository";
 
 interface IRequestCreate {
@@ -13,12 +14,18 @@ class ProductService {
   constructor(
     @inject("ProductRepository")
     private productRepository: IProductRepository
-  ) {
-    console.log("aqui2");
+  ) {}
+  async findByName(name: string): Promise<Product[]> {
+    const products = await this.productRepository.findByName(name);
+    return products;
+  }
+
+  async findAll(): Promise<Product[]> {
+    const products = await this.productRepository.findAll();
+    return products;
   }
 
   async create({ name, description, price }: IRequestCreate): Promise<void> {
-    console.log("aqui2");
     this.productRepository.create({ name, description, price });
   }
 }

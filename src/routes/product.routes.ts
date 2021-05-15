@@ -6,9 +6,9 @@ const productRouter = Router();
 
 const productController = new ProductController();
 
-productRouter.get("/", (request, response) => {
-  return response.json({ messsage: "Route GET Ok" });
-});
+productRouter.get("/", productController.findAll);
+
+productRouter.get("/name", productController.findByName);
 
 productRouter.post("/", productController.Create);
 
