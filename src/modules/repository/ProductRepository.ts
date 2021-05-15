@@ -13,15 +13,11 @@ class ProductRepository implements IProductRepository {
     this.repostory = getRepository(Product);
   }
   async findByName(name: string): Promise<Product[]> {
-    console.log(name);
-
     const products = await this.repostory.find({
       where: {
         name: Raw((alias) => `${alias} ILIKE '%${name}%'`),
       },
     });
-
-    console.log(products);
 
     return products;
   }

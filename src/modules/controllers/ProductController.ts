@@ -9,8 +9,6 @@ class ProductController {
 
     const products = await productService.findAll();
 
-    console.log(products);
-
     return response.json(products);
   }
 
@@ -24,7 +22,6 @@ class ProductController {
     const productService = container.resolve(ProductService);
 
     const products = await productService.findByName(name);
-    console.log(products);
 
     return response.status(200).json(products);
   }

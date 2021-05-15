@@ -22,7 +22,6 @@ class ProductService {
 
   async findAll(): Promise<Product[]> {
     const products = await this.productRepository.findAll();
-    console.log("aqui3");
     return products;
   }
 
