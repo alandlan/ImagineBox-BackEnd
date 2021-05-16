@@ -6,8 +6,6 @@ const productRouter = Router();
 
 const productController = new ProductController();
 
-productRouter.get("/", productController.findAll);
-
 productRouter.get("/name", productController.findByName);
 
 productRouter.post("/", productController.Create);

@@ -20,11 +20,6 @@ class ProductService {
     return products;
   }
 
-  async findAll(): Promise<Product[]> {
-    const products = await this.productRepository.findAll();
-    return products;
-  }
-
   async create({ name, description, price }: IRequestCreate): Promise<void> {
     this.productRepository.create({ name, description, price });
   }
