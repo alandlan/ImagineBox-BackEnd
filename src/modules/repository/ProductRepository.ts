@@ -1,10 +1,8 @@
 import { getRepository, Raw, Repository } from "typeorm";
 
+import { ICreateProductDTO } from "../dtos/ICreateProductDto";
 import { Product } from "../models/Product";
-import {
-  ICreateProductDTO,
-  IProductRepository,
-} from "./interface/IProductRepository";
+import { IProductRepository } from "./interface/IProductRepository";
 
 class ProductRepository implements IProductRepository {
   private repostory: Repository<Product>;
@@ -12,10 +10,10 @@ class ProductRepository implements IProductRepository {
   constructor() {
     this.repostory = getRepository(Product);
   }
-  async findByName(name: string): Promise<Product[]> {
+  async findByName(Name: string): Promise<Product[]> {
     const products = await this.repostory.find({
       where: {
-        name: Raw((alias) => `${alias} ILIKE '%${name}%'`),
+        Name: Raw((alias) => `${alias} ILIKE '%${Name}%'`),
       },
     });
 
@@ -28,9 +26,9 @@ class ProductRepository implements IProductRepository {
 
   async create({ name, description, price }: ICreateProductDTO): Promise<void> {
     const product = this.repostory.create({
-      name,
-      description,
-      price,
+      Name: name,
+      Description: description,
+      Price: price,
     });
 
     await this.repostory.save(product);
