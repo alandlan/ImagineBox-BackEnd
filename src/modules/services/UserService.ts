@@ -1,6 +1,7 @@
 import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../errors/AppError";
 import { ICreateUserDTO } from "../dtos/ICreateUserDto";
 import { User } from "../models/User";
 import { IUserRepository } from "../repository/interface/IUserRepository";
@@ -12,6 +13,12 @@ class UserService {
     private userRepository: IUserRepository
   ) {}
 
+  async FindById(id: string): Promise<User> {
+    const user = await this.userRepository.FindByEmail(id);
+
+    return user;
+  }
+
   async FindByEmail(email: string): Promise<User> {
     const user = await this.userRepository.FindByEmail(email);
 
@@ -22,7 +29,7 @@ class UserService {
     const user = await this.userRepository.FindByEmail(email);
 
     if (user) {
-      throw new Error("User already exists!");
+      throw new AppError("User already exists!", 400);
     }
 
     const passwordHash = await hash(password, 8);
