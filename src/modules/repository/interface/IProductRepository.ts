@@ -1,10 +1,5 @@
+import { ICreateProductDTO } from "../../dtos/ICreateProductDto";
 import { Product } from "../../models/Product";
-
-interface ICreateProductDTO {
-  name: string;
-  description: string;
-  price: number;
-}
 
 interface IProductRepository {
   create({ name, description, price }: ICreateProductDTO): Promise<void>;
@@ -12,4 +7,4 @@ interface IProductRepository {
   findByName(name: string): Promise<Product[]>;
 }
 
-export { IProductRepository, ICreateProductDTO };
+export { IProductRepository };
