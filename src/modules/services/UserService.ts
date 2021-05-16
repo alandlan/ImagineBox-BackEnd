@@ -13,6 +13,12 @@ class UserService {
     private userRepository: IUserRepository
   ) {}
 
+  async FindById(id: string): Promise<User> {
+    const user = await this.userRepository.FindByEmail(id);
+
+    return user;
+  }
+
   async FindByEmail(email: string): Promise<User> {
     const user = await this.userRepository.FindByEmail(email);
 
