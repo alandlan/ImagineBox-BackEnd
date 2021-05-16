@@ -4,23 +4,23 @@ import { v4 as uuidV4 } from "uuid";
 @Entity("Product")
 class Product {
   @PrimaryColumn()
-  id?: string;
+  Id?: string;
 
   @Column()
-  name!: string;
+  Name!: string;
 
   @Column()
-  description!: string;
+  Description!: string;
 
   @Column()
-  price!: number;
+  Price!: number;
 
   @CreateDateColumn()
-  created_at!: Date;
+  Created_at!: Date;
 
   constructor() {
-    if (!this.id) {
-      this.id = uuidV4();
+    if (!this.Id) {
+      this.Id = uuidV4();
     }
   }
 }
