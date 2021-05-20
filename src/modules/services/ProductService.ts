@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../errors/AppError";
 import { deleteFile } from "../../utils/file";
+import { IUpdateProductDto } from "../dtos/IUpdateProductDto";
 import { Product } from "../models/Product";
 import { IProductRepository } from "../repository/interface/IProductRepository";
 
@@ -46,6 +47,27 @@ class ProductService {
     }
 
     product.Img = product_image;
+
+    await this.productRepository.create(product);
+  }
+
+  async update({
+    id,
+    name,
+    description,
+    price,
+    isActive,
+  }: IUpdateProductDto): Promise<void> {
+    const product = await this.productRepository.findById(id);
+
+    if (!product) {
+      throw new AppError("Produto não encontrado!", 404);
+    }
+
+    product.Name = name;
+    product.Description = description;
+    product.Price = price;
+    product.IsActive = isActive;
 
     await this.productRepository.create(product);
   }

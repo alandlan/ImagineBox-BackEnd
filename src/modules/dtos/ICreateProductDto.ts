@@ -4,6 +4,7 @@ interface ICreateProductDTO {
   Description: string;
   Price: number;
   Img?: string;
+  IsActive?: boolean;
 }
 
 export { ICreateProductDTO };
