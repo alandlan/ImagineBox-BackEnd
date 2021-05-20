@@ -4,7 +4,7 @@ import { v4 as uuidV4 } from "uuid";
 @Entity("Product")
 class Product {
   @PrimaryColumn()
-  Id?: string;
+  Id!: string;
 
   @Column()
   Name!: string;
@@ -14,6 +14,9 @@ class Product {
 
   @Column()
   Price!: number;
+
+  @Column()
+  Img?: string;
 
   @CreateDateColumn()
   Created_at!: Date;

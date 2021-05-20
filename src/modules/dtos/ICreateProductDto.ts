@@ -1,7 +1,9 @@
 interface ICreateProductDTO {
-  name: string;
-  description: string;
-  price: number;
+  Id?: string;
+  Name: string;
+  Description: string;
+  Price: number;
+  Img?: string;
 }
 
 export { ICreateProductDTO };
