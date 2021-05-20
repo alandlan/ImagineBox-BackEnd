@@ -23,9 +23,28 @@ class ProductController {
 
     const productService = container.resolve(ProductService);
 
-    await productService.create({ name, description, price });
+    await productService.create({
+      Name: name,
+      Description: description,
+      Price: price,
+    });
 
     return response.status(201).send();
+  }
+
+  async AddImage(request: Request, response: Response): Promise<Response> {
+    const { product_id } = request.query;
+    console.log(product_id);
+    const product_file = request.file.filename;
+
+    const productService = container.resolve(ProductService);
+
+    await productService.addImage({
+      product_id,
+      product_image: product_file,
+    });
+
+    return response.status(204).send();
   }
 }
 
