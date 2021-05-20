@@ -1,6 +1,8 @@
 import { Response, Request } from "express";
 import { container } from "tsyringe";
 
+import { AppError } from "../../errors/AppError";
+import { IUpdateProductDto } from "../dtos/IUpdateProductDto";
 import { ProductService } from "../services/ProductService";
 
 class ProductController {
@@ -45,6 +47,20 @@ class ProductController {
     });
 
     return response.status(204).send();
+  }
+
+  async Update(request: Request, response: Response): Promise<Response> {
+    const { id, name, description, price, isActive } = request.body;
+
+    if (!id) {
+      throw new AppError("Faltou informar o Id do Produto!", 404);
+    }
+
+    const productService = container.resolve(ProductService);
+
+    await productService.update({ id, name, description, price, isActive });
+
+    return response.status(200).send();
   }
 }
 

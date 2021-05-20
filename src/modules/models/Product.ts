@@ -18,12 +18,19 @@ class Product {
   @Column()
   Img?: string;
 
+  @Column()
+  IsActive!: boolean;
+
   @CreateDateColumn()
   Created_at!: Date;
 
   constructor() {
     if (!this.Id) {
       this.Id = uuidV4();
+    }
+
+    if (!this.IsActive) {
+      this.IsActive = false;
     }
   }
 }

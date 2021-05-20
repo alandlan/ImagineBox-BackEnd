@@ -14,6 +14,8 @@ productRouter.get("/name", productController.findByName);
 
 productRouter.post("/", productController.Create);
 
+productRouter.post("/update", ensureAuthenticated, productController.Update);
+
 productRouter.patch(
   "/image",
   // ensureAuthenticated,
