@@ -11,13 +11,13 @@ class UserRepository implements IUserRepository {
     this.repository = getRepository(User);
   }
 
-  async FindById(id: string): Promise<User> {
+  async FindById(id: string): Promise<User | undefined> {
     const user = await this.repository.findOne({ Id: id });
 
     return user;
   }
 
-  async FindByEmail(email: string): Promise<User> {
+  async FindByEmail(email: string): Promise<User | undefined> {
     const user = await this.repository.findOne({ Email: email });
 
     return user;

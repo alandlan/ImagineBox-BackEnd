@@ -4,7 +4,7 @@ import { Product } from "../../models/Product";
 interface IProductRepository {
   create(data: ICreateProductDTO): Promise<void>;
   findAll(): Promise<Product[]>;
-  findById(id: string): Promise<Product>;
+  findById(id: string): Promise<Product | undefined>;
   findByName(name: string): Promise<Product[]>;
 }
 
