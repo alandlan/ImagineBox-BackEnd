@@ -11,7 +11,7 @@ class ProductRepository implements IProductRepository {
     this.repostory = getRepository(Product);
   }
 
-  async findById(id: string): Promise<Product> {
+  async findById(id: string): Promise<Product | undefined> {
     const product = await this.repostory.findOne(id);
 
     return product;
@@ -38,7 +38,7 @@ class ProductRepository implements IProductRepository {
     Img,
     Id,
     IsActive,
-  }: ICreateProductDTO): Promise<void> {
+  }: ICreateProductDTO): Promise<Product> {
     const product = this.repostory.create({
       Name,
       Description,
@@ -49,6 +49,8 @@ class ProductRepository implements IProductRepository {
     });
 
     await this.repostory.save(product);
+
+    return product;
   }
 }
 

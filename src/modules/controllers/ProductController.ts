@@ -25,13 +25,13 @@ class ProductController {
 
     const productService = container.resolve(ProductService);
 
-    await productService.create({
+    const product = await productService.create({
       Name: name,
       Description: description,
       Price: price,
     });
 
-    return response.status(201).send();
+    return response.status(201).json(product);
   }
 
   async AddImage(request: Request, response: Response): Promise<Response> {
@@ -42,7 +42,7 @@ class ProductController {
     const productService = container.resolve(ProductService);
 
     await productService.addImage({
-      product_id,
+      product_id: "string",
       product_image: product_file,
     });
 
