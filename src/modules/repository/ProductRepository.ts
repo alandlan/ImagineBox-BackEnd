@@ -38,7 +38,7 @@ class ProductRepository implements IProductRepository {
     Img,
     Id,
     IsActive,
-  }: ICreateProductDTO): Promise<void> {
+  }: ICreateProductDTO): Promise<Product> {
     const product = this.repostory.create({
       Name,
       Description,
@@ -49,6 +49,8 @@ class ProductRepository implements IProductRepository {
     });
 
     await this.repostory.save(product);
+
+    return product;
   }
 }
 

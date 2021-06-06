@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../errors/AppError";
@@ -23,13 +24,23 @@ class ProductService {
     @inject("ProductRepository")
     private productRepository: IProductRepository
   ) {}
-  async findByName(name: string): Promise<Product[]> {
+  async findByName(name: string): Promise<Product[] | undefined> {
     const products = await this.productRepository.findByName(name);
     return products;
   }
 
-  async create({ Name, Description, Price }: IRequestCreate): Promise<void> {
-    this.productRepository.create({ Name, Description, Price });
+  async create({ Name, Description, Price }: IRequestCreate): Promise<Product> {
+    if (Name.length < 4 || Description.length < 4 || Price <= 0) {
+      throw new AppError("Produto inválido!", 500);
+    }
+
+    const product = await this.productRepository.create({
+      Name,
+      Description,
+      Price,
+    });
+
+    return product;
   }
 
   async addImage({
