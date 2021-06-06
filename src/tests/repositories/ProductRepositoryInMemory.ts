@@ -19,16 +19,16 @@ class ProductRepositoryInMemory implements IProductRepository {
     return product;
   }
   async findAll(): Promise<Product[]> {
-    const { products } = await this;
+    const { products } = this;
     return products;
   }
   async findById(id: string): Promise<Product | undefined> {
-    const product = await this.products.find((p) => p.Id === id);
+    const product = this.products.find((p) => p.Id === id);
 
     return product;
   }
   async findByName(name: string): Promise<Product[] | undefined> {
-    const products = await this.products.filter((p) => p.Name === name);
+    const products = this.products.filter((p) => p.Name.includes(name));
 
     return products;
   }

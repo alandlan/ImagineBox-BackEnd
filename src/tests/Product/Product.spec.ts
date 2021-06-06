@@ -30,4 +30,42 @@ describe("Create Product", () => {
       });
     }).rejects.toBeInstanceOf(AppError);
   });
+
+  it("should be able to update a product", async () => {
+    const product = await productService.create({
+      Name: "Spider Man",
+      Description: "Boneco do Spider Man.",
+      Price: 59.99,
+    });
+
+    product.Name = "Mario Brother";
+
+    await productService.update({
+      id: product.Id,
+      price: product.Price,
+      description: product.Description,
+      isActive: product.IsActive,
+      name: product.Name,
+    });
+
+    const productUpdated = await productService.findByName("Mario");
+
+    if (!productUpdated) {
+      throw new AppError("produto não encontrado!", 401);
+    }
+
+    expect(productUpdated[0].Name).toEqual(product.Name);
+  });
+
+  it("should not be able to update a product with Id incorrect", async () => {
+    expect(async () => {
+      await productService.update({
+        name: "Teste",
+        description: "Teste",
+        isActive: false,
+        price: 99,
+        id: "abc",
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
 });
