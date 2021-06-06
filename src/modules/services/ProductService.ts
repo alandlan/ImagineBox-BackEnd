@@ -24,6 +24,13 @@ class ProductService {
     @inject("ProductRepository")
     private productRepository: IProductRepository
   ) {}
+
+  async findById(id: string): Promise<Product | undefined> {
+    const product = await this.productRepository.findById(id);
+
+    return product;
+  }
+
   async findByName(name: string): Promise<Product[] | undefined> {
     const products = await this.productRepository.findByName(name);
     return products;
@@ -70,6 +77,8 @@ class ProductService {
     isActive,
   }: IUpdateProductDto): Promise<void> {
     const product = await this.productRepository.findById(id);
+
+    console.log(id);
 
     if (!product) {
       throw new AppError("Produto não encontrado!", 404);
