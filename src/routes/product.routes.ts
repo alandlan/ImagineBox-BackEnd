@@ -2,6 +2,7 @@ import { Router } from "express";
 import multer from "multer";
 
 import uploadConfig from "../config/upload";
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import { ProductController } from "../modules/controllers/ProductController";
 
@@ -12,13 +13,24 @@ const productController = new ProductController();
 
 productRouter.get("/name", productController.findByName);
 
-productRouter.post("/", productController.Create);
+productRouter.post(
+  "/",
+  ensureAuthenticated,
+  ensureAdmin,
+  productController.Create
+);
 
-productRouter.post("/update", ensureAuthenticated, productController.Update);
+productRouter.post(
+  "/update",
+  ensureAuthenticated,
+  ensureAdmin,
+  productController.Update
+);
 
 productRouter.patch(
   "/image",
-  // ensureAuthenticated,
+  ensureAuthenticated,
+  ensureAdmin,
   uploadProductImage.single("product_file"),
   productController.AddImage
 );
