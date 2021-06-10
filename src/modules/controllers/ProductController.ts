@@ -42,7 +42,7 @@ class ProductController {
     const productService = container.resolve(ProductService);
 
     await productService.addImage({
-      product_id: "string",
+      product_id,
       product_image: product_file,
     });
 
