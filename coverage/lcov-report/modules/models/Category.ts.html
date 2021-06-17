@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for tests/repositories/UserRepositoryInMenory.ts</title>
+    <title>Code coverage report for modules/models/Category.ts</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">tests/repositories</a> UserRepositoryInMenory.ts</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">modules/models</a> Category.ts</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.1% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>27/31</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>2/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>3/4</span>
+                <span class='fraction'>1/1</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">87.1% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>27/31</span>
+                <span class='fraction'>31/31</span>
             </div>
         
             
@@ -107,49 +107,49 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { ICreateUserDTO } from "../../modules/dtos/ICreateUserDto";
-import { User } from "../../modules/models/User";
-import { IUserRepository } from "../../modules/repository/interface/IUserRepository";
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Column, CreateDateColumn, PrimaryColumn } from "typeorm";
+import { v4 as uuidV4 } from "uuid";
 &nbsp;
-class UserRepositoryInMemory implements IUserRepository {
-  users: User[] = [];
+class Category {
+  @PrimaryColumn()
+  Id!: string;
 &nbsp;
-  async Create({ name, email, password }: ICreateUserDTO): Promise&lt;void&gt; {
-    const user = new User();
+  @Column()
+  Name!: string;
 &nbsp;
-    Object.assign(user, {
-      Email: email,
-      Name: name,
-      Password: password,
-    });
+  @Column()
+  Description!: string;
 &nbsp;
-    this.users.push(user);
+  @Column()
+  IsActive!: boolean;
+&nbsp;
+  @CreateDateColumn()
+  Created_at!: Date;
+&nbsp;
+  constructor() {
+    if (!this.Id) {
+      this.Id = uuidV4();
+    }
+&nbsp;
+    if (!this.IsActive) {
+      this.IsActive = false;
+    }
   }
-  async FindByEmail(email: string): Promise&lt;User | undefined&gt; {
-    const user = this.users.find((u) =&gt; u.Email === email);
-&nbsp;
-    return user;
-  }
-<span class="fstat-no" title="function not covered" >  async FindById(id: string): Promise&lt;User | undefined&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const user = this.users.find((u) =&gt; u.Id === id);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    return user;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
 }
 &nbsp;
-export { UserRepositoryInMemory };
+export { Category };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
