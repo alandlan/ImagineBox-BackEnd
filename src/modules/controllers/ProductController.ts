@@ -2,7 +2,6 @@ import { Response, Request } from "express";
 import { container } from "tsyringe";
 
 import { AppError } from "../../errors/AppError";
-import { IUpdateProductDto } from "../dtos/IUpdateProductDto";
 import { ProductService } from "../services/ProductService";
 
 class ProductController {
@@ -36,13 +35,12 @@ class ProductController {
 
   async AddImage(request: Request, response: Response): Promise<Response> {
     const { product_id } = request.query;
-    console.log(product_id);
     const product_file = request.file.filename;
 
     const productService = container.resolve(ProductService);
 
     await productService.addImage({
-      product_id,
+      product_id: product_id as string,
       product_image: product_file,
     });
 
