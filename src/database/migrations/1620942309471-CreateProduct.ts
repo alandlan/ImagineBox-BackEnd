@@ -24,6 +24,19 @@ export class CreateProduct1620942309471 implements MigrationInterface {
             type: "money",
           },
           {
+            name: "CategoryId",
+            type: "uuid",
+          },
+          {
+            name: "IsActive",
+            type: "boolean",
+          },
+          {
+            name: "Img",
+            type: "varchar",
+            isNullable: true,
+          },
+          {
             name: "Created_at",
             type: "timestamp",
             default: "now()",
