@@ -1,15 +1,15 @@
+import "reflect-metadata";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
 
-import { AppError } from "./errors/AppError";
-
-import "./database";
-
 import "./shared/container";
-
+import createConnection from "./database";
+import { AppError } from "./errors/AppError";
 import { router } from "./routes";
 import swaggerFile from "./swagger.json";
+
+createConnection();
 
 const app = express();
 
