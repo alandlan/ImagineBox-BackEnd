@@ -1,15 +1,14 @@
 import { Router } from "express";
 
-import { ensureAdmin } from "../middlewares/ensureAdmin";
-import { ensureAuthenticated } from "../middlewares/ensureAuthenticated";
 import { UserController } from "../modules/controllers/UserController";
+import { authenticateRouter } from "./authenticate.routes";
 
 const userRouter = Router();
 
 const userController = new UserController();
 
-userRouter.get("/GetByEmail", userController.FindByEmail);
+userRouter.get("/GetByEmail", authenticateRouter, userController.FindByEmail);
 
-userRouter.post("/", ensureAuthenticated, ensureAdmin, userController.Create);
+userRouter.post("/", userController.Create);
 
 export { userRouter };
