@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
@@ -29,13 +30,13 @@ class AuthenticateService {
     const user = await this.userRepository.FindByEmail(email);
 
     if (!user) {
-      throw new AppError("Usuário ou Senha Inválidos!");
+      throw new AppError("Usuário ou Senha Inválidos!", 500);
     }
 
     const passwordMatch = await compare(password, user.Password);
 
     if (!passwordMatch) {
-      throw new AppError("Usuário ou Senha Inválidos!");
+      throw new AppError("Usuário ou Senha Inválidos!", 500);
     }
 
     const token = sign({}, "b3438d429eb95e919beea64a56c14bae", {

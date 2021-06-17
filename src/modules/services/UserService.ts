@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import { hash } from "bcrypt";
 import { inject, injectable } from "tsyringe";
 
@@ -16,13 +17,13 @@ class UserService {
   async FindById(id: string): Promise<User> {
     const user = await this.userRepository.FindByEmail(id);
 
-    return user;
+    return user!;
   }
 
   async FindByEmail(email: string): Promise<User> {
     const user = await this.userRepository.FindByEmail(email);
 
-    return user;
+    return user!;
   }
 
   async Create({ name, password, email }: ICreateUserDTO): Promise<void> {
