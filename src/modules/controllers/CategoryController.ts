@@ -13,6 +13,16 @@ class CategoryController {
 
     return response.status(201).json(category);
   }
+
+  async findByName(request: Request, response: Response): Promise<Response> {
+    const { Name } = request.query;
+
+    const categoryService = container.resolve(CategoryService);
+
+    const category = await categoryService.findByName(Name);
+
+    return response.status(200).json(category);
+  }
 }
 
 export { CategoryController };
