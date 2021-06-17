@@ -3,6 +3,7 @@ interface ICreateProductDTO {
   Name: string;
   Description: string;
   Price: number;
+  CategoryId: string;
   Img?: string;
   IsActive?: boolean;
 }

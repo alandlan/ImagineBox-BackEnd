@@ -20,7 +20,7 @@ class ProductController {
   }
 
   async Create(request: Request, response: Response): Promise<Response> {
-    const { name, description, price } = request.body;
+    const { name, description, price, categoryId } = request.body;
 
     const productService = container.resolve(ProductService);
 
@@ -28,6 +28,7 @@ class ProductController {
       Name: name,
       Description: description,
       Price: price,
+      CategoryId: categoryId,
     });
 
     return response.status(201).json(product);

@@ -1,5 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryColumn,
+} from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+
+import { Product } from "./Product";
 
 @Entity("Category")
 class Category {
@@ -14,6 +23,10 @@ class Category {
 
   @Column()
   IsActive!: boolean;
+
+  @OneToMany(() => Product, (product) => product.Category)
+  @JoinColumn({ name: "CategoryId" })
+  cars!: Product[];
 
   @CreateDateColumn()
   Created_at!: Date;

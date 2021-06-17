@@ -11,6 +11,7 @@ interface IRequestCreate {
   Name: string;
   Description: string;
   Price: number;
+  CategoryId: string;
 }
 
 interface IRequestAddImage {
@@ -36,7 +37,12 @@ class ProductService {
     return products;
   }
 
-  async create({ Name, Description, Price }: IRequestCreate): Promise<Product> {
+  async create({
+    Name,
+    Description,
+    Price,
+    CategoryId,
+  }: IRequestCreate): Promise<Product> {
     if (Name.length < 4 || Description.length < 4 || Price <= 0) {
       throw new AppError("Produto inválido!", 500);
     }
@@ -45,6 +51,7 @@ class ProductService {
       Name,
       Description,
       Price,
+      CategoryId,
     });
 
     return product;
