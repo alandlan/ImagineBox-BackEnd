@@ -27,6 +27,18 @@ class CategoryService {
 
     return category;
   }
+
+  async findByName(Name: string): Promise<Category> {
+    const category = await this.categoryRepository.findByName(Name);
+
+    return category;
+  }
+
+  async findById(Id: string): Promise<Category> {
+    const category = await this.categoryRepository.findById(Id);
+
+    return category;
+  }
 }
 
 export { CategoryService };

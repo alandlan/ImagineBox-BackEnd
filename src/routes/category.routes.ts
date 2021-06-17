@@ -14,4 +14,8 @@ categoryRouter.post(
   categoryController.create
 );
 
+categoryRouter.get("/:Id", categoryController.findById);
+
+categoryRouter.get("/", categoryController.findByName);
+
 export { categoryRouter };
