@@ -9,7 +9,8 @@
     "dev": "ts-node-dev --inspect=0.0.0.0:9229 --transpile-only --ignore-watch node_modules --respawn src/index.ts",
     "typeorm": "ts-node-dev ./node_modules/typeorm/cli",
     "dockerDev": "docker-compose start",
-    "test": "jest"
+    "test": "jest",
+    "seed:admin": "ts-node-dev src/database/seed/admin.ts"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",
