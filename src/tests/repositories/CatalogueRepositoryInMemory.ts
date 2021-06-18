@@ -16,6 +16,12 @@ class CatalogueRepositoryInMemory implements ICatalogueRepository {
 
     return catalogue;
   }
+
+  async findByName(Name: string): Promise<Catalogue> {
+    const catalogue = this.catalogues.find((c) => c.Name === Name);
+
+    return catalogue!;
+  }
 }
 
 export { CatalogueRepositoryInMemory };
