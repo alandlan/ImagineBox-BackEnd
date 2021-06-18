@@ -25,7 +25,7 @@ describe("Create Category", () => {
     expect(category).toHaveProperty("Id");
   });
 
-  it("should not be able to create a new category if already exists with Name", async () => {
+  it("should not be able to create a new category if already exists with same name", async () => {
     expect(async () => {
       await categoryService.create({
         Name: "Papelaria",
