@@ -16,6 +16,7 @@ describe("Create Product", () => {
       Name: "Spider Man",
       Description: "Boneco do Spider Man.",
       Price: 59.99,
+      CategoryId: "1234"
     });
 
     expect(product).toHaveProperty("Id");
@@ -27,6 +28,7 @@ describe("Create Product", () => {
         Name: "",
         Description: "Boneco do Spider Man.",
         Price: 59.99,
+        CategoryId: "1234"
       });
     }).rejects.toBeInstanceOf(AppError);
   });
@@ -36,6 +38,7 @@ describe("Create Product", () => {
       Name: "Spider Man",
       Description: "Boneco do Spider Man.",
       Price: 59.99,
+      CategoryId: "1234"
     });
 
     product.Name = "Mario Brother";

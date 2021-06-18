@@ -85,8 +85,6 @@ class ProductService {
   }: IUpdateProductDto): Promise<void> {
     const product = await this.productRepository.findById(id);
 
-    console.log(id);
-
     if (!product) {
       throw new AppError("Produto não encontrado!", 404);
     }

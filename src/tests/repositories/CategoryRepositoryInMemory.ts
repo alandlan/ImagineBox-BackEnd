@@ -4,6 +4,11 @@ import { ICategoryRepository } from "../../modules/repository/interface/ICategor
 
 class CategoryRepositoryInMemory implements ICategoryRepository {
   categories: Category[] = [];
+
+  async findById(Id: string):Promise<Category>{
+    return this.categories.find((c) => c.Id === Id)!;
+  }
+
   async findByName(name: string): Promise<Category> {
     return this.categories.find((c) => c.Name === name)!;
   }
