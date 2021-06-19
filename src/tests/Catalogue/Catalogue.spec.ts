@@ -1,3 +1,4 @@
+import { AppError } from "../../errors/AppError";
 import { CatalogueService } from "../../modules/services/CatalogueService";
 import { CatalogueRepositoryInMemory } from "../repositories/CatalogueRepositoryInMemory";
 
@@ -17,5 +18,12 @@ describe("Create a Catalogue", () => {
     );
 
     expect(catalogue).toHaveProperty("Id");
+  });
+
+  it("should not be able to create a new cataloque if already exists same Name!", async () => {
+    expect(async () => {
+      await catalogueService.create("Vitrine", "Produtos em Destaque!");
+      await catalogueService.create("Vitrine", "Produtos em Destaque!");
+    }).rejects.toBeInstanceOf(AppError);
   });
 });
