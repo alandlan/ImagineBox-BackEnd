@@ -26,7 +26,15 @@ class UserService {
     return user!;
   }
 
-  async Create({ name, password, email }: ICreateUserDTO): Promise<void> {
+  async Create({
+    name,
+    password,
+    email,
+    documentType,
+    document,
+    phone,
+    mobile,
+  }: ICreateUserDTO): Promise<void> {
     const user = await this.userRepository.FindByEmail(email);
 
     if (user) {
@@ -35,7 +43,15 @@ class UserService {
 
     const passwordHash = await hash(password, 8);
 
-    await this.userRepository.Create({ name, password: passwordHash, email });
+    await this.userRepository.Create({
+      name,
+      password: passwordHash,
+      email,
+      documentType,
+      document,
+      phone,
+      mobile,
+    });
   }
 }
 

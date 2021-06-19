@@ -19,11 +19,20 @@ class UserController {
   }
 
   async Create(request: Request, response: Response): Promise<Response> {
-    const { name, email, password } = request.body;
+    const { name, email, password, documentType, document, phone, mobile } =
+      request.body;
 
     const userService = container.resolve(UserService);
 
-    await userService.Create({ name, email, password });
+    await userService.Create({
+      name,
+      email,
+      password,
+      documentType,
+      document,
+      phone,
+      mobile,
+    });
 
     return response.status(201).send();
   }

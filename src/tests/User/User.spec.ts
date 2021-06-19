@@ -15,6 +15,10 @@ describe("Create User", () => {
       name: "admin",
       password: "1234",
       email: "admin@admin.com.br",
+      documentType: "CNPJ",
+      document: "12345678901234",
+      phone: "1112345678",
+      mobile: "11123456789",
     });
 
     const user = await userService.FindByEmail("admin@admin.com.br");

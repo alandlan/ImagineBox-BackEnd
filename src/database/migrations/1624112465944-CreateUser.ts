@@ -32,20 +32,20 @@ export class CreateUser1624112465944 implements MigrationInterface {
             type: "varchar",
           },
           {
-            name: "IsActive",
-            type: "boolean",
-          },
-          {
-            name: "IsAdmin",
-            type: "boolean",
-          },
-          {
             name: "Phone",
             type: "varchar",
           },
           {
             name: "Mobile",
             type: "varchar",
+          },
+          {
+            name: "IsActive",
+            type: "boolean",
+          },
+          {
+            name: "IsAdmin",
+            type: "boolean",
           },
           {
             name: "Created_at",

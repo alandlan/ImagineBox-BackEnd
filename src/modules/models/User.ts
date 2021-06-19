@@ -16,6 +16,21 @@ class User {
   Password!: string;
 
   @Column()
+  DocumentType!: string;
+
+  @Column()
+  Document!: string;
+
+  @Column()
+  Phone!: string;
+
+  @Column()
+  Mobile!: string;
+
+  @Column()
+  IsActive?: boolean;
+
+  @Column()
   IsAdmin?: boolean;
 
   @CreateDateColumn()
