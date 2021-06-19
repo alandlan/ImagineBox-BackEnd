@@ -4,6 +4,7 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../errors/AppError";
 import { ICreateUserDTO } from "../dtos/ICreateUserDto";
+import { IUpdateUserDTO } from "../dtos/IUpdateUserDto";
 import { User } from "../models/User";
 import { IUserRepository } from "../repository/interface/IUserRepository";
 
@@ -15,7 +16,7 @@ class UserService {
   ) {}
 
   async FindById(id: string): Promise<User> {
-    const user = await this.userRepository.FindByEmail(id);
+    const user = await this.userRepository.FindById(id);
 
     return user!;
   }
@@ -52,6 +53,12 @@ class UserService {
       phone,
       mobile,
     });
+  }
+
+  async Update({ id, mobile, phone }: IUpdateUserDTO): Promise<User> {
+    const user = await this.userRepository.Update({ id, phone, mobile });
+
+    return user;
   }
 }
 

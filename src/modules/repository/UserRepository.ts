@@ -1,6 +1,8 @@
 import { getRepository, Repository } from "typeorm";
 
+import { AppError } from "../../errors/AppError";
 import { ICreateUserDTO } from "../dtos/ICreateUserDto";
+import { IUpdateUserDTO } from "../dtos/IUpdateUserDto";
 import { User } from "../models/User";
 import { IUserRepository } from "./interface/IUserRepository";
 
@@ -45,6 +47,21 @@ class UserRepository implements IUserRepository {
     });
 
     await this.repository.save(user);
+  }
+
+  async Update({ id, phone, mobile }: IUpdateUserDTO): Promise<User> {
+    const user = await this.repository.findOne(id);
+
+    if (!user) {
+      throw new AppError("Usuário não localizado!", 404);
+    }
+
+    user.Phone = phone;
+    user.Mobile = mobile;
+
+    await this.repository.save(user);
+
+    return user!;
   }
 }
 
