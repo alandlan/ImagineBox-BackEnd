@@ -20,8 +20,8 @@ productRouter.post(
   productController.Create
 );
 
-productRouter.post(
-  "/update",
+productRouter.put(
+  "/",
   ensureAuthenticated,
   ensureAdmin,
   productController.Update

@@ -33,6 +33,14 @@ class UserController {
     return response.status(200).json(user);
   }
 
+  async FindAll(request: Request, response: Response): Promise<Response> {
+    const userService = container.resolve(UserService);
+
+    const users = await userService.FindAll();
+
+    return response.status(200).json(users);
+  }
+
   async Create(request: Request, response: Response): Promise<Response> {
     const { name, email, password, documentType, document, phone, mobile } =
       request.body;

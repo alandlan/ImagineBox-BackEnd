@@ -16,6 +16,12 @@ userRouter.get(
   ensureAdmin,
   userController.FindByEmail
 );
+userRouter.get(
+  "/all",
+  ensureAuthenticated,
+  ensureAdmin,
+  userController.FindAll
+);
 userRouter.put("/", ensureAuthenticated, userController.Update);
 
 export { userRouter };

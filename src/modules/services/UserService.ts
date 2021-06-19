@@ -27,6 +27,12 @@ class UserService {
     return user!;
   }
 
+  async FindAll(): Promise<User[]> {
+    const users = await this.userRepository.FindAll();
+
+    return users;
+  }
+
   async Create({
     name,
     password,
