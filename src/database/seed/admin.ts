@@ -10,8 +10,8 @@ async function create() {
   const password = await hash("admin", 8);
 
   await connection.query(`
-    INSERT INTO "User"("Id","Name","Email","Password","IsAdmin","Created_at")
-    VALUES ('${id}','admin','admin@imaginebox.com.br','${password}',true, 'now()')
+    INSERT INTO "User"("Id","Name","Email","Password","DocumentType","Document","IsActive","IsAdmin","Phone","Mobile","Created_at")
+    VALUES ('${id}','Admin','admin@imaginebox.com.br','${password}','CNPJ','96710738000111',true,true,'1156628116','11966179541', 'now()')
   `);
 
   await connection.close();
