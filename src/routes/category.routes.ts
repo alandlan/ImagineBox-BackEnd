@@ -11,11 +11,11 @@ categoryRouter.post(
   "/",
   ensureAuthenticated,
   ensureAdmin,
-  categoryController.create
+  categoryController.Create
 );
 
-categoryRouter.get("/:Id", categoryController.findById);
+categoryRouter.get("/:Id", categoryController.FindById);
 
-categoryRouter.get("/", categoryController.findByName);
+categoryRouter.get("/", categoryController.FindByName);
 
 export { categoryRouter };

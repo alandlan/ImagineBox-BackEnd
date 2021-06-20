@@ -4,7 +4,7 @@ import { container } from "tsyringe";
 import { CategoryService } from "../services/CategoryService";
 
 class CategoryController {
-  async create(request: Request, response: Response): Promise<Response> {
+  async Create(request: Request, response: Response): Promise<Response> {
     const { Name, Description } = request.body;
 
     const categoryService = container.resolve(CategoryService);
@@ -14,17 +14,17 @@ class CategoryController {
     return response.status(201).json(category);
   }
 
-  async findByName(request: Request, response: Response): Promise<Response> {
+  async FindByName(request: Request, response: Response): Promise<Response> {
     const { Name } = request.query;
 
     const categoryService = container.resolve(CategoryService);
 
-    const category = await categoryService.findByName(Name);
+    const category = await categoryService.findByName(Name as string);
 
     return response.status(200).json(category);
   }
 
-  async findById(request: Request, response: Response): Promise<Response> {
+  async FindById(request: Request, response: Response): Promise<Response> {
     const { Id } = request.params;
 
     const categoryService = container.resolve(CategoryService);
