@@ -5,22 +5,25 @@ import { Product } from "../models/Product";
 import { IProductRepository } from "./interface/IProductRepository";
 
 class ProductRepository implements IProductRepository {
-  private repostory: Repository<Product>;
+  private repository: Repository<Product>;
 
   constructor() {
-    this.repostory = getRepository(Product);
+    this.repository = getRepository(Product);
   }
 
-  async findById(id: string): Promise<Product | undefined> {
-    const product = await this.repostory.findOne(id, {
-      relations: ["Category"],
-    });
+  async FindById(id: string): Promise<Product | undefined> {
+    const product = await this.repository
+      .createQueryBuilder("p")
+      .innerJoinAndSelect("p.Category", "Category")
+      .leftJoinAndSelect("p.Catalogues", "Catalogue")
+      .where("p.Id = :id", { id })
+      .getOne();
 
     return product;
   }
 
-  async findByName(Name: string): Promise<Product[]> {
-    const products = await this.repostory.find({
+  async FindByName(Name: string): Promise<Product[]> {
+    const products = await this.repository.find({
       relations: ["Category"],
       where: {
         Name: Raw((alias) => `${alias} ILIKE '%${Name}%'`),
@@ -29,12 +32,17 @@ class ProductRepository implements IProductRepository {
 
     return products;
   }
-  async findAll(): Promise<Product[]> {
-    const products = await this.repostory.find({ relations: ["Category"] });
+  async FindAll(): Promise<Product[]> {
+    const products = await this.repository.find({ relations: ["Category"] });
     return products;
   }
 
-  async create({
+  async FindByIds(Ids: string[]): Promise<Product[]> {
+    const products = await this.repository.findByIds(Ids);
+    return products;
+  }
+
+  async Create({
     Name,
     Description,
     Price,
@@ -43,7 +51,7 @@ class ProductRepository implements IProductRepository {
     Id,
     IsActive,
   }: ICreateProductDTO): Promise<Product> {
-    const product = this.repostory.create({
+    const product = this.repository.create({
       Name,
       Description,
       Price,
@@ -53,7 +61,7 @@ class ProductRepository implements IProductRepository {
       IsActive,
     });
 
-    await this.repostory.save(product);
+    await this.repository.save(product);
 
     return product;
   }

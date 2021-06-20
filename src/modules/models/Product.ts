@@ -3,11 +3,14 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   PrimaryColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
+import { Catalogue } from "./Catalogue";
 import { Category } from "./Category";
 
 @Entity("Product")
@@ -39,6 +42,14 @@ class Product {
 
   @CreateDateColumn()
   Created_at!: Date;
+
+  @ManyToMany(() => Catalogue, (catalogue) => catalogue.Products)
+  @JoinTable({
+    name: "CatalogueProduct",
+    joinColumns: [{ name: "ProductId", referencedColumnName: "Id" }],
+    inverseJoinColumns: [{ name: "CatalogueId" }],
+  })
+  Catalogues!: Catalogue[];
 
   constructor() {
     if (!this.Id) {

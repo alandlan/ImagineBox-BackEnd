@@ -15,11 +15,13 @@ catalogueRouter.post(
   catalogueController.Create
 );
 
-catalogueRouter.get(
-  "/",
+catalogueRouter.get("/", catalogueController.FindByName);
+
+catalogueRouter.post(
+  "/:id",
   ensureAuthenticated,
   ensureAdmin,
-  catalogueController.FindByName
+  catalogueController.UpdateCatalogues
 );
 
 export { catalogueRouter };

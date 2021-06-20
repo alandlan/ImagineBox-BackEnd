@@ -15,8 +15,8 @@ interface IRequestCreate {
 }
 
 interface IRequestAddImage {
-  product_id: string;
-  product_image: string;
+  ProductId: string;
+  ProductImage: string;
 }
 
 @injectable()
@@ -26,18 +26,18 @@ class ProductService {
     private productRepository: IProductRepository
   ) {}
 
-  async findById(id: string): Promise<Product | undefined> {
-    const product = await this.productRepository.findById(id);
+  async FindById(id: string): Promise<Product | undefined> {
+    const product = await this.productRepository.FindById(id);
 
     return product;
   }
 
-  async findByName(name: string): Promise<Product[] | undefined> {
-    const products = await this.productRepository.findByName(name);
+  async FindByName(name: string): Promise<Product[] | undefined> {
+    const products = await this.productRepository.FindByName(name);
     return products;
   }
 
-  async create({
+  async Create({
     Name,
     Description,
     Price,
@@ -47,7 +47,7 @@ class ProductService {
       throw new AppError("Produto inválido!", 500);
     }
 
-    const product = await this.productRepository.create({
+    const product = await this.productRepository.Create({
       Name,
       Description,
       Price,
@@ -57,11 +57,8 @@ class ProductService {
     return product;
   }
 
-  async addImage({
-    product_id,
-    product_image,
-  }: IRequestAddImage): Promise<void> {
-    const product = await this.productRepository.findById(product_id);
+  async AddImage({ ProductId, ProductImage }: IRequestAddImage): Promise<void> {
+    const product = await this.productRepository.FindById(ProductId);
 
     if (!product) {
       throw new AppError("Produto não encontrado!", 404);
@@ -71,19 +68,19 @@ class ProductService {
       await deleteFile(`./tmp/product/${product.Img}`);
     }
 
-    product.Img = product_image;
+    product.Img = ProductImage;
 
-    await this.productRepository.create(product);
+    await this.productRepository.Create(product);
   }
 
-  async update({
+  async Update({
     id,
     name,
     description,
     price,
     isActive,
   }: IUpdateProductDto): Promise<void> {
-    const product = await this.productRepository.findById(id);
+    const product = await this.productRepository.FindById(id);
 
     if (!product) {
       throw new AppError("Produto não encontrado!", 404);
@@ -94,7 +91,7 @@ class ProductService {
     product.Price = price;
     product.IsActive = isActive;
 
-    await this.productRepository.create(product);
+    await this.productRepository.Create(product);
   }
 }
 
