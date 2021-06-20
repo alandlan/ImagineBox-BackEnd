@@ -12,13 +12,16 @@ class ProductRepository implements IProductRepository {
   }
 
   async findById(id: string): Promise<Product | undefined> {
-    const product = await this.repostory.findOne(id);
+    const product = await this.repostory.findOne(id, {
+      relations: ["Category"],
+    });
 
     return product;
   }
 
   async findByName(Name: string): Promise<Product[]> {
     const products = await this.repostory.find({
+      relations: ["Category"],
       where: {
         Name: Raw((alias) => `${alias} ILIKE '%${Name}%'`),
       },
@@ -27,7 +30,7 @@ class ProductRepository implements IProductRepository {
     return products;
   }
   async findAll(): Promise<Product[]> {
-    const products = await this.repostory.find();
+    const products = await this.repostory.find({ relations: ["Category"] });
     return products;
   }
 
