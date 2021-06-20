@@ -5,7 +5,7 @@ import { AppError } from "../../errors/AppError";
 import { ProductService } from "../services/ProductService";
 
 class ProductController {
-  async findByName(request: Request, response: Response): Promise<Response> {
+  async FindByName(request: Request, response: Response): Promise<Response> {
     const { name } = request.body;
 
     if (!name) {
@@ -17,6 +17,16 @@ class ProductController {
     const products = await productService.findByName(name);
 
     return response.status(200).json(products);
+  }
+
+  async FindById(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const productService = container.resolve(ProductService);
+
+    const product = await productService.findById(id);
+
+    return response.status(200).json(product);
   }
 
   async Create(request: Request, response: Response): Promise<Response> {

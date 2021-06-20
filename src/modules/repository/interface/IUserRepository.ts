@@ -15,6 +15,7 @@ interface IUserRepository {
   FindByEmail(email: string): Promise<User | undefined>;
   FindById(id: string): Promise<User | undefined>;
   Update({ id, phone, mobile }: IUpdateUserDTO): Promise<User>;
+  FindAll(): Promise<User[]>;
 }
 
 export { IUserRepository };

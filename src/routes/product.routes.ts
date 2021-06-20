@@ -11,7 +11,9 @@ const uploadProductImage = multer(uploadConfig.upload("./tmp/product"));
 
 const productController = new ProductController();
 
-productRouter.get("/name", productController.findByName);
+productRouter.get("/name", productController.FindByName);
+
+productRouter.get("/:id", productController.FindById);
 
 productRouter.post(
   "/",
@@ -20,8 +22,8 @@ productRouter.post(
   productController.Create
 );
 
-productRouter.post(
-  "/update",
+productRouter.put(
+  "/",
   ensureAuthenticated,
   ensureAdmin,
   productController.Update
