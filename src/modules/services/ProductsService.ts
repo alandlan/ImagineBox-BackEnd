@@ -11,8 +11,8 @@ class ProductsService {
     private productRepository: IProductRepository
   ) {}
 
-  async findAll(): Promise<Product[]> {
-    const products = await this.productRepository.findAll();
+  async FindAll(): Promise<Product[]> {
+    const products = await this.productRepository.FindAll();
     return products;
   }
 }

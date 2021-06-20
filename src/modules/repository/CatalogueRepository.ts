@@ -11,19 +11,32 @@ class CatalogueRepository implements ICatalogueRepository {
     this.repository = getRepository(Catalogue);
   }
 
-  async create({ Name, Description }: ICreateCatalogueDTO): Promise<Catalogue> {
+  async Create({
+    Name,
+    Description,
+    Products,
+  }: ICreateCatalogueDTO): Promise<Catalogue> {
     const catalogue = await this.repository.create({
       Name,
       Description,
+      Products,
     });
 
     await this.repository.save(catalogue);
 
     return catalogue;
   }
-  async findByName(Name: string): Promise<Catalogue> {
+  async FindByName(Name: string): Promise<Catalogue> {
     const catalogue = await this.repository.findOne({ Name });
     return catalogue!;
+  }
+  async FindById(Id: string): Promise<Catalogue> {
+    const catalogue = await this.repository.findOne(Id);
+    return catalogue!;
+  }
+  async FindByIds(Ids: string[]): Promise<Catalogue[]> {
+    const catalogues = await this.repository.findByIds(Ids);
+    return catalogues;
   }
 }
 

@@ -26,7 +26,7 @@ class Category {
 
   @OneToMany(() => Product, (product) => product.Category)
   @JoinColumn({ name: "CategoryId" })
-  cars!: Product[];
+  Products!: Product[];
 
   @CreateDateColumn()
   Created_at!: Date;

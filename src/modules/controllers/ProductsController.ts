@@ -5,9 +5,9 @@ import { ProductsService } from "../services/ProductsService";
 
 class ProductsController {
   async FindAll(request: Request, response: Response): Promise<Response> {
-    const productService = container.resolve(ProductsService);
+    const productsService = container.resolve(ProductsService);
 
-    const products = await productService.findAll();
+    const products = await productsService.FindAll();
 
     return response.json(products);
   }

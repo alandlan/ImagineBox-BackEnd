@@ -14,7 +14,7 @@ class ProductController {
 
     const productService = container.resolve(ProductService);
 
-    const products = await productService.findByName(Name as string);
+    const products = await productService.FindByName(Name as string);
 
     return response.status(200).json(products);
   }
@@ -24,7 +24,7 @@ class ProductController {
 
     const productService = container.resolve(ProductService);
 
-    const product = await productService.findById(id);
+    const product = await productService.FindById(id);
 
     return response.status(200).json(product);
   }
@@ -34,7 +34,7 @@ class ProductController {
 
     const productService = container.resolve(ProductService);
 
-    const product = await productService.create({
+    const product = await productService.Create({
       Name: name,
       Description: description,
       Price: price,
@@ -50,9 +50,9 @@ class ProductController {
 
     const productService = container.resolve(ProductService);
 
-    await productService.addImage({
-      product_id: product_id as string,
-      product_image: product_file,
+    await productService.AddImage({
+      ProductId: product_id as string,
+      ProductImage: product_file,
     });
 
     return response.status(204).send();
@@ -67,7 +67,7 @@ class ProductController {
 
     const productService = container.resolve(ProductService);
 
-    await productService.update({ id, name, description, price, isActive });
+    await productService.Update({ id, name, description, price, isActive });
 
     return response.status(200).send();
   }

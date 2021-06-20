@@ -9,7 +9,7 @@ class CatalogueController {
 
     const catalogueService = container.resolve(CatalogueService);
 
-    const catalogue = await catalogueService.create({ Name, Description });
+    const catalogue = await catalogueService.Create({ Name, Description });
 
     return response.status(201).json(catalogue);
   }
@@ -19,12 +19,29 @@ class CatalogueController {
 
     const catalogueService = container.resolve(CatalogueService);
 
-    const catalogue = await catalogueService.findByName(Name as string);
+    const catalogue = await catalogueService.FindByName(Name as string);
 
     if (!catalogue)
       return response.status(404).json({ message: "Catalogo não encontrado!" });
 
     return response.status(200).json(catalogue);
+  }
+
+  async UpdateCatalogues(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    const { Id } = request.params;
+    const { ProductIds } = request.body;
+
+    const catalogueService = container.resolve(CatalogueService);
+
+    const catalogues = await catalogueService.UpdateCatalogues({
+      CatalogueId: Id,
+      ProductIds,
+    });
+
+    return response.status(201).json(catalogues);
   }
 }
 
