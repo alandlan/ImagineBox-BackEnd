@@ -1,6 +1,7 @@
 import { Router } from "express";
 
 import { authenticateRouter } from "./authenticate.routes";
+import { catalogueRouter } from "./catalogue.routes";
 import { categoryRouter } from "./category.routes";
 import { productRouter } from "./product.routes";
 import { productsRouter } from "./products.routes";
@@ -14,6 +15,7 @@ router.use("/users", usersRouter);
 router.use("/category", categoryRouter);
 router.use("/product", productRouter);
 router.use("/products", productsRouter);
+router.use("/catalogue", catalogueRouter);
 router.use(authenticateRouter);
 
 export { router };

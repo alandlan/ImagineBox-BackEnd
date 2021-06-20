@@ -11,7 +11,7 @@ const uploadProductImage = multer(uploadConfig.upload("./tmp/product"));
 
 const productController = new ProductController();
 
-productRouter.get("/name", productController.FindByName);
+productRouter.get("/", productController.FindByName);
 
 productRouter.get("/:id", productController.FindById);
 

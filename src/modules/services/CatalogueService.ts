@@ -1,18 +1,28 @@
+import { inject, injectable } from "tsyringe";
+
 import { AppError } from "../../errors/AppError";
+import { ICreateCatalogueDTO } from "../dtos/ICreateCatalogueDto";
 import { Catalogue } from "../models/Catalogue";
 import { ICatalogueRepository } from "../repository/interface/ICatalogueRepository";
 
+@injectable()
 class CatalogueService {
-  constructor(private catalogueRepository: ICatalogueRepository) {}
+  constructor(
+    @inject("CatalogueRepository")
+    private catalogueRepository: ICatalogueRepository
+  ) {}
 
-  async create(Name: string, Description: string): Promise<Catalogue> {
+  async create({ Name, Description }: ICreateCatalogueDTO): Promise<Catalogue> {
     const catalogueExists = await this.findByName(Name);
 
     if (catalogueExists) {
-      throw new AppError("Categoria já existe!", 500);
+      throw new AppError("Categoria já existe!", 402);
     }
 
-    const catalogue = await this.catalogueRepository.create(Name, Description);
+    const catalogue = await this.catalogueRepository.create({
+      Name,
+      Description,
+    });
 
     return catalogue;
   }

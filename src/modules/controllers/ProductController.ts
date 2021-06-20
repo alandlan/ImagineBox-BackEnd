@@ -6,15 +6,15 @@ import { ProductService } from "../services/ProductService";
 
 class ProductController {
   async FindByName(request: Request, response: Response): Promise<Response> {
-    const { name } = request.body;
+    const { Name } = request.query;
 
-    if (!name) {
+    if (!Name) {
       return response.status(401).send({ message: "Produto não localizado!" });
     }
 
     const productService = container.resolve(ProductService);
 
-    const products = await productService.findByName(name);
+    const products = await productService.findByName(Name as string);
 
     return response.status(200).json(products);
   }

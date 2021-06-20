@@ -1,7 +1,8 @@
+import { ICreateCatalogueDTO } from "../../dtos/ICreateCatalogueDto";
 import { Catalogue } from "../../models/Catalogue";
 
 interface ICatalogueRepository {
-  create(Name: string, Description: string): Promise<Catalogue>;
+  create({ Name, Description }: ICreateCatalogueDTO): Promise<Catalogue>;
   findByName(Name: string): Promise<Catalogue>;
 }
 
