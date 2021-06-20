@@ -6,15 +6,15 @@ import { UserService } from "../services/UserService";
 
 class UserController {
   async FindByEmail(request: Request, response: Response): Promise<Response> {
-    const { email } = request.body;
+    const { Email } = request.query;
 
-    if (!email) {
+    if (!Email) {
       throw new AppError("Email não foi enviado!", 404);
     }
 
     const userService = container.resolve(UserService);
 
-    const user = await userService.FindByEmail(email);
+    const user = await userService.FindByEmail(Email as string);
 
     return response.status(200).json(user);
   }

@@ -11,7 +11,7 @@ const userController = new UserController();
 userRouter.post("/", userController.Create);
 userRouter.get("/:id", ensureAuthenticated, userController.FindById);
 userRouter.get(
-  "/GetByEmail",
+  "/",
   ensureAuthenticated,
   ensureAdmin,
   userController.FindByEmail
