@@ -1,6 +1,8 @@
 import { container } from "tsyringe";
 
+import { CatalogueRepository } from "../../modules/repository/CatalogueRepository";
 import { CategoryRepository } from "../../modules/repository/CategoryRepository";
+import { ICatalogueRepository } from "../../modules/repository/interface/ICatalogueRepository";
 import { ICategoryRepository } from "../../modules/repository/interface/ICategoryRepository";
 import { IProductRepository } from "../../modules/repository/interface/IProductRepository";
 import { IUserRepository } from "../../modules/repository/interface/IUserRepository";
@@ -17,4 +19,9 @@ container.registerSingleton<IUserRepository>("UserRepository", UserRepository);
 container.registerSingleton<ICategoryRepository>(
   "CategoryRepository",
   CategoryRepository
+);
+
+container.registerSingleton<ICatalogueRepository>(
+  "CatalogueRepository",
+  CatalogueRepository
 );
