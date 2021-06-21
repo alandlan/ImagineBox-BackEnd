@@ -18,10 +18,12 @@ catalogueRouter.post(
 catalogueRouter.get("/", catalogueController.FindByName);
 
 catalogueRouter.post(
-  "/:id",
+  "/:Id",
   ensureAuthenticated,
   ensureAdmin,
   catalogueController.UpdateCatalogues
 );
+
+catalogueRouter.get("/:Id/products", catalogueController.FindProducts);
 
 export { catalogueRouter };
