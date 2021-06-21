@@ -6,6 +6,7 @@ interface ICatalogueRepository {
   FindByName(Name: string): Promise<Catalogue>;
   FindById(Id: string): Promise<Catalogue>;
   FindByIds(Ids: string[]): Promise<Catalogue[]>;
+  FindProducts(Id: string): Promise<Catalogue>;
 }
 
 export { ICatalogueRepository };

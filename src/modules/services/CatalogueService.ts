@@ -63,6 +63,16 @@ class CatalogueService {
 
     return catalogueUpdated;
   }
+
+  async FindProducts(Id: string): Promise<Catalogue> {
+    const catalogue = await this.catalogueRepository.FindProducts(Id);
+
+    if (!catalogue) {
+      throw new AppError("Catalogo não encontrado!", 404);
+    }
+
+    return catalogue;
+  }
 }
 
 export { CatalogueService };

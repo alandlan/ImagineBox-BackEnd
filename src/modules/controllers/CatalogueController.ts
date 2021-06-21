@@ -43,6 +43,16 @@ class CatalogueController {
 
     return response.status(201).json(catalogues);
   }
+
+  async FindProducts(request: Request, response: Response): Promise<Response> {
+    const { Id } = request.params;
+
+    const catalogueService = container.resolve(CatalogueService);
+
+    const catalogue = await catalogueService.FindProducts(Id);
+
+    return response.status(200).json(catalogue);
+  }
 }
 
 export { CatalogueController };

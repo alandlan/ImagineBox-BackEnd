@@ -15,8 +15,10 @@ class CatalogueRepository implements ICatalogueRepository {
     Name,
     Description,
     Products,
+    Id,
   }: ICreateCatalogueDTO): Promise<Catalogue> {
     const catalogue = await this.repository.create({
+      Id,
       Name,
       Description,
       Products,
@@ -37,6 +39,15 @@ class CatalogueRepository implements ICatalogueRepository {
   async FindByIds(Ids: string[]): Promise<Catalogue[]> {
     const catalogues = await this.repository.findByIds(Ids);
     return catalogues;
+  }
+  async FindProducts(Id: string): Promise<Catalogue> {
+    const catalogue = await this.repository
+      .createQueryBuilder("c")
+      .leftJoinAndSelect("c.Products", "Products")
+      .where("c.Id = :Id", { Id })
+      .getOne();
+
+    return catalogue!;
   }
 }
 
