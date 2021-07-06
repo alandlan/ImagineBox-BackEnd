@@ -1,5 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryColumn,
+} from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+
+import { UserAddress } from "./UserAddress";
 
 @Entity("User")
 class User {
@@ -35,6 +44,10 @@ class User {
 
   @CreateDateColumn()
   Created_at!: Date;
+
+  @OneToMany(() => UserAddress, (userAddress) => userAddress.User)
+  @JoinColumn({ name: "UserId" })
+  UserAddress!: UserAddress[];
 
   constructor() {
     if (!this.Id) {
