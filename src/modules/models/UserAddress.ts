@@ -43,7 +43,7 @@ class UserAddress {
   Created_at!: Date;
 
   @ManyToOne(() => User)
-  @JoinColumn({ name: "UseId" })
+  @JoinColumn({ name: "UserId" })
   User!: User;
 
   constructor() {
