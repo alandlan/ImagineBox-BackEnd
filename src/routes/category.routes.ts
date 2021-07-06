@@ -14,6 +14,13 @@ categoryRouter.post(
   categoryController.Create
 );
 
+categoryRouter.put(
+  "/:Id",
+  ensureAuthenticated,
+  ensureAdmin,
+  categoryController.Update
+);
+
 categoryRouter.get("/:Id", categoryController.FindById);
 
 categoryRouter.get("/", categoryController.FindByName);

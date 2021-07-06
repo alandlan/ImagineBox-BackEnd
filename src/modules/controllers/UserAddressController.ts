@@ -46,21 +46,23 @@ class UserAddressController {
   }
 
   async Delete(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const { id: Id } = request.params;
+    const { id: UserId } = request.user;
 
     const userAddressService = container.resolve(UserAddressService);
 
-    await userAddressService.Delete(id);
+    await userAddressService.Delete(Id, UserId);
 
     return response.status(200).json({ message: "Endereço removido!" });
   }
 
   async FindById(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const { id: Id } = request.params;
+    const { id: UserId } = request.user;
 
     const userAddressService = container.resolve(UserAddressService);
 
-    const userAddress = await userAddressService.FindById(id);
+    const userAddress = await userAddressService.FindById(Id, UserId);
 
     return response.status(200).json(userAddress);
   }

@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../errors/AppError";
 import { ICreateUserAddressDTO } from "../dtos/ICreateUserAddressDto";
 import { UserAddress } from "../models/UserAddress";
 import { IUserAddressRepository } from "../repository/interface/IUserAddressRepository";
@@ -43,12 +44,22 @@ class UserAddressService {
     return userAddress;
   }
 
-  async Delete(Id: string): Promise<void> {
+  async Delete(Id: string, UserId: string): Promise<void> {
+    const userAddress = await this.userAddressRepository.FindById(Id);
+
+    if (!userAddress || userAddress.UserId !== UserId) {
+      throw new AppError("Endereço não localizado", 404);
+    }
+
     await this.userAddressRepository.Delete(Id);
   }
 
-  async FindById(Id: string): Promise<UserAddress> {
+  async FindById(Id: string, UserId: string): Promise<UserAddress> {
     const userAddress = await this.userAddressRepository.FindById(Id);
+
+    if (!userAddress || userAddress.UserId !== UserId) {
+      throw new AppError("Endereço não localizado", 404);
+    }
 
     return userAddress;
   }
