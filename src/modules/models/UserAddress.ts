@@ -3,51 +3,48 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToMany,
+  ManyToOne,
   PrimaryColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
-import { UserAddress } from "./UserAddress";
+import { User } from "./User";
 
-@Entity("User")
-class User {
+@Entity("UserAddress")
+class UserAddress {
   @PrimaryColumn()
   Id!: string;
 
   @Column()
-  Name!: string;
+  UserId!: string;
 
   @Column()
-  Email!: string;
+  Description!: string;
 
   @Column()
-  Password!: string;
+  PostalCode!: string;
 
   @Column()
-  DocumentType!: string;
+  Number!: string;
 
   @Column()
-  Document!: string;
+  Complement!: string;
 
   @Column()
-  Phone!: string;
+  Neighborhood!: string;
 
   @Column()
-  Mobile!: string;
+  City!: string;
 
   @Column()
-  IsActive?: boolean;
-
-  @Column()
-  IsAdmin?: boolean;
+  State!: string;
 
   @CreateDateColumn()
   Created_at!: Date;
 
-  @OneToMany(() => UserAddress, (userAddress) => userAddress.User)
+  @ManyToOne(() => User)
   @JoinColumn({ name: "UserId" })
-  UserAddress!: UserAddress[];
+  User!: User;
 
   constructor() {
     if (!this.Id) {
@@ -56,4 +53,4 @@ class User {
   }
 }
 
-export { User };
+export { UserAddress };
