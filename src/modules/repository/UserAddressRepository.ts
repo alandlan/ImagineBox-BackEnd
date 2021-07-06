@@ -10,6 +10,17 @@ class UserAddressRepository implements IUserAddressRepository {
   constructor() {
     this.repository = getRepository(UserAddress);
   }
+  async FindById(Id: string): Promise<UserAddress> {
+    const userAddress = await this.repository.findOne(Id);
+
+    return userAddress!;
+  }
+
+  async Delete(Id: string): Promise<void> {
+    console.log(Id);
+
+    await this.repository.delete({ Id });
+  }
 
   async Create(Data: ICreateUserAddressDTO): Promise<UserAddress> {
     const userAddress = this.repository.create({
@@ -28,7 +39,7 @@ class UserAddressRepository implements IUserAddressRepository {
     return userAddress!;
   }
 
-  async FindByUserId(userId: string): Promise<UserAddress[]> {
+  async FindAllByUserId(userId: string): Promise<UserAddress[]> {
     const userAddress = await this.repository
       .createQueryBuilder("c")
       .where("c.UserId = :userId", { userId })

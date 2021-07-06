@@ -35,8 +35,20 @@ class UserAddressService {
     return userAddress;
   }
 
-  async FindByUserId(userId: string): Promise<UserAddress[]> {
-    const userAddress = await this.userAddressRepository.FindByUserId(userId);
+  async FindAllByUserId(userId: string): Promise<UserAddress[]> {
+    const userAddress = await this.userAddressRepository.FindAllByUserId(
+      userId
+    );
+
+    return userAddress;
+  }
+
+  async Delete(Id: string): Promise<void> {
+    await this.userAddressRepository.Delete(Id);
+  }
+
+  async FindById(Id: string): Promise<UserAddress> {
+    const userAddress = await this.userAddressRepository.FindById(Id);
 
     return userAddress;
   }
