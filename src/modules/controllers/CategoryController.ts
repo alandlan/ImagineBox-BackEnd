@@ -9,7 +9,7 @@ class CategoryController {
 
     const categoryService = container.resolve(CategoryService);
 
-    const category = await categoryService.create({ Name, Description });
+    const category = await categoryService.Create({ Name, Description });
 
     return response.status(201).json(category);
   }
@@ -19,7 +19,7 @@ class CategoryController {
 
     const categoryService = container.resolve(CategoryService);
 
-    const category = await categoryService.findByName(Name as string);
+    const category = await categoryService.FindByName(Name as string);
 
     return response.status(200).json(category);
   }
@@ -29,9 +29,25 @@ class CategoryController {
 
     const categoryService = container.resolve(CategoryService);
 
-    const category = await categoryService.findById(Id);
+    const category = await categoryService.FindById(Id);
 
     return response.status(200).json(category);
+  }
+
+  async Update(request: Request, response: Response): Promise<Response> {
+    const { Id } = request.params;
+    const { Description, Name, IsActive } = request.body;
+
+    const categoryService = container.resolve(CategoryService);
+
+    const category = await categoryService.Update({
+      Id,
+      Name,
+      Description,
+      IsActive,
+    });
+
+    return response.status(202).json(category);
   }
 }
 

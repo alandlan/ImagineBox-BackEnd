@@ -8,7 +8,7 @@ class ProductController {
   async FindByName(request: Request, response: Response): Promise<Response> {
     const { Name } = request.query;
 
-    if (!Name) {
+    if (!Name || Name === "") {
       return response.status(401).send({ message: "Produto não localizado!" });
     }
 

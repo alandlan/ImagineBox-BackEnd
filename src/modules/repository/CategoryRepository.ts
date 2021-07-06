@@ -10,13 +10,20 @@ class CategoryRepository implements ICategoryRepository {
   constructor() {
     this.repository = getRepository(Category);
   }
-  async findById(Id: string): Promise<Category> {
+
+  async Update(category: Category): Promise<Category> {
+    await this.repository.save(category);
+
+    return category;
+  }
+
+  async FindById(Id: string): Promise<Category> {
     const category = await this.repository.findOne(Id);
 
     return category!;
   }
 
-  async create({ Name, Description }: ICreateCategoryDTO): Promise<Category> {
+  async Create({ Name, Description }: ICreateCategoryDTO): Promise<Category> {
     const category = this.repository.create({ Name, Description });
 
     await this.repository.save(category);
@@ -24,7 +31,7 @@ class CategoryRepository implements ICategoryRepository {
     return category;
   }
 
-  async findByName(Name: string): Promise<Category> {
+  async FindByName(Name: string): Promise<Category> {
     const category = await this.repository.findOne({ Name });
     return category!;
   }
