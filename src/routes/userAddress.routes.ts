@@ -12,7 +12,19 @@ userAddressRoutes.post("/", ensureAuthenticated, userAddressController.Create);
 userAddressRoutes.get(
   "/",
   ensureAuthenticated,
-  userAddressController.FindByUserId
+  userAddressController.FindAllByUserId
+);
+
+userAddressRoutes.delete(
+  "/:id",
+  ensureAuthenticated,
+  userAddressController.Delete
+);
+
+userAddressRoutes.get(
+  "/:id",
+  ensureAuthenticated,
+  userAddressController.FindById
 );
 
 export { userAddressRoutes };

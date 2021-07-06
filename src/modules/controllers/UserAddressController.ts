@@ -32,12 +32,35 @@ class UserAddressController {
     return response.status(201).json(userAddress);
   }
 
-  async FindByUserId(request: Request, response: Response): Promise<Response> {
+  async FindAllByUserId(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
     const { id } = request.user;
 
     const userAddressService = container.resolve(UserAddressService);
 
-    const userAddress = await userAddressService.FindByUserId(id);
+    const userAddress = await userAddressService.FindAllByUserId(id);
+
+    return response.status(200).json(userAddress);
+  }
+
+  async Delete(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const userAddressService = container.resolve(UserAddressService);
+
+    await userAddressService.Delete(id);
+
+    return response.status(200).json({ message: "Endereço removido!" });
+  }
+
+  async FindById(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    const userAddressService = container.resolve(UserAddressService);
+
+    const userAddress = await userAddressService.FindById(id);
 
     return response.status(200).json(userAddress);
   }
