@@ -2,7 +2,7 @@ interface ICreateUserTokenDTO {
   UserId: string;
   App: string;
   RefreshToken: string;
-  ExpiresDate: string;
+  ExpiresDate: Date;
 }
 
 export { ICreateUserTokenDTO };
