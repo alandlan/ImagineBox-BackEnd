@@ -1,6 +1,6 @@
 // import "reflect-metadata";
 import { compare } from "bcrypt";
-import { sign } from "jsonwebtoken";
+import { sign, verify } from "jsonwebtoken";
 import { inject, injectable } from "tsyringe";
 
 import auth from "../../config/auth";
@@ -12,6 +12,11 @@ import { IUserTokenRepository } from "../repository/interface/IUserTokenReposito
 interface IRequest {
   email: string;
   password: string;
+}
+
+interface IPayload {
+  sub: string;
+  email: string;
 }
 
 interface IResponse {
@@ -85,6 +90,43 @@ class AuthenticateService {
     };
 
     return tokenReturn;
+  }
+
+  async RefreshToken(token: string): Promise<string> {
+    const { email, sub } = verify(token, auth.SecretRefreshToken) as IPayload;
+
+    const UserId = sub;
+
+    const userToken = await this.userTokenRepository.FindByUserAndToken(
+      UserId,
+      token
+    );
+
+    if (!userToken) {
+      throw new AppError("Refresh Token does not exists!", 404);
+    }
+
+    console.log(userToken.Id);
+
+    await this.userTokenRepository.DeleteById(userToken.Id);
+
+    const RefreshToken = sign({ email }, auth.SecretRefreshToken, {
+      subject: sub,
+      expiresIn: auth.ExpiresIntRefreshToken,
+    });
+
+    const ExpiresDate = this.dayjsDateProvider.AddDays(
+      auth.ExpiresRefreshTokenDays
+    );
+
+    await this.userTokenRepository.Create({
+      ExpiresDate,
+      RefreshToken,
+      UserId,
+      App: "WEB",
+    });
+
+    return RefreshToken;
   }
 }
 

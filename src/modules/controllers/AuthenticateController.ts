@@ -13,6 +13,19 @@ class AuthenticateController {
 
     return response.json(info);
   }
+
+  async RefreshToken(request: Request, response: Response): Promise<Response> {
+    const token =
+      request.body.token ||
+      request.headers["x-access-token"] ||
+      request.query.token;
+
+    const refreshTokenUseCase = container.resolve(AuthenticateService);
+
+    const refresh_token = await refreshTokenUseCase.RefreshToken(token);
+
+    return response.json(refresh_token);
+  }
 }
 
 export { AuthenticateController };
