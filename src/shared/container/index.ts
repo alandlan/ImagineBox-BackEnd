@@ -11,6 +11,8 @@ import { ProductRepository } from "../../modules/repository/ProductRepository";
 import { UserAddressRepository } from "../../modules/repository/UserAddressRepository";
 import { UserRepository } from "../../modules/repository/UserRepository";
 
+import "../provider";
+
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
   ProductRepository
