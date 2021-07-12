@@ -37,11 +37,11 @@ class AuthenticateService {
   async Authenticate({ email, password }: IRequest): Promise<IResponse> {
     const user = await this.userRepository.FindByEmail(email);
     const {
-      expires_in_token,
-      secret_token,
-      secret_refresh_token,
-      expires_int_refresh_token,
-      expires_refresh_token_days,
+      ExpiresInToken,
+      SecretToken,
+      SecretRefreshToken,
+      ExpiresIntRefreshToken,
+      ExpiresRefreshTokenDays,
     } = auth;
 
     if (!user) {
@@ -54,18 +54,18 @@ class AuthenticateService {
       throw new AppError("Usuário ou Senha Inválidos!", 500);
     }
 
-    const token = sign({}, secret_token, {
+    const token = sign({}, SecretToken, {
       subject: user.Id,
-      expiresIn: expires_in_token,
+      expiresIn: ExpiresInToken,
     });
 
-    const refreshToken = sign({ email }, secret_refresh_token, {
+    const refreshToken = sign({ email }, SecretRefreshToken, {
       subject: user.Id,
-      expiresIn: expires_int_refresh_token,
+      expiresIn: ExpiresIntRefreshToken,
     });
 
     const refreshTokenExpiresDate = this.dayjsDateProvider.AddDays(
-      expires_refresh_token_days
+      ExpiresRefreshTokenDays
     );
 
     await this.userTokenRepository.Create({
