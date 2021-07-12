@@ -7,9 +7,13 @@ import { ICategoryRepository } from "../../modules/repository/interface/ICategor
 import { IProductRepository } from "../../modules/repository/interface/IProductRepository";
 import { IUserAddressRepository } from "../../modules/repository/interface/IUserAddressRepository";
 import { IUserRepository } from "../../modules/repository/interface/IUserRepository";
+import { IUserTokenRepository } from "../../modules/repository/interface/IUserTokenRepository";
 import { ProductRepository } from "../../modules/repository/ProductRepository";
 import { UserAddressRepository } from "../../modules/repository/UserAddressRepository";
 import { UserRepository } from "../../modules/repository/UserRepository";
+import { UserTokenRepository } from "../../modules/repository/UserTokenRepository";
+
+import "../provider";
 
 container.registerSingleton<IProductRepository>(
   "ProductRepository",
@@ -31,4 +35,9 @@ container.registerSingleton<ICatalogueRepository>(
 container.registerSingleton<IUserAddressRepository>(
   "UserAddressRepository",
   UserAddressRepository
+);
+
+container.registerSingleton<IUserTokenRepository>(
+  "UserTokenRepository",
+  UserTokenRepository
 );
