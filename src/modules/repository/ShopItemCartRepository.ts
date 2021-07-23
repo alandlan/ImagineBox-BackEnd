@@ -13,14 +13,12 @@ class ShopItemCartRepository implements IShopItemCartRepository {
 
   async AddItem({
     Id,
-    UserId,
     ProductId,
     Quantity,
     ShopCartId,
   }: ICreateShopItemCart): Promise<void> {
     const itemCart = this.repository.create({
       Id,
-      UserId,
       ProductId,
       ShopCartId,
       Quantity,

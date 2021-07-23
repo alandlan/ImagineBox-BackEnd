@@ -10,9 +10,6 @@ class ShopItemCart {
   ShopCartId!: string;
 
   @Column()
-  UserId!: string;
-
-  @Column()
   ProductId!: string;
 
   @Column()

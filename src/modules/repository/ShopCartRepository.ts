@@ -10,6 +10,10 @@ class ShopCartRepository implements IShopCartRepository {
   constructor() {
     this.repository = getRepository(ShopCart);
   }
+  async FindByUserId(UserId: string): Promise<ShopCart> {
+    const shopCart = await this.repository.findOne({ UserId });
+    return shopCart!;
+  }
 
   async Create({ Id, UserId }: ICreateShopCartDTO): Promise<void> {
     const shopCart = this.repository.create({ Id, UserId });
