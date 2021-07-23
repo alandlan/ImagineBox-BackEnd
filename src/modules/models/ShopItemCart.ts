@@ -7,7 +7,7 @@ class ShopItemCart {
   Id!: string;
 
   @Column()
-  ShopCart!: string;
+  ShopCartId!: string;
 
   @Column()
   UserId!: string;
