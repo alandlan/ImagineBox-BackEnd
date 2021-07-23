@@ -16,6 +16,18 @@ class ShopCartController {
       .status(202)
       .json({ message: "Produto adicionado ao Carrinho!" });
   }
+
+  async FindByUserId(request: Request, response: Response): Promise<Response> {
+    const { id: UserId } = request.user;
+
+    const shopCartService = container.resolve(ShopCartService);
+
+    const shopCart = await shopCartService.FindByUserId(UserId);
+
+    console.log(shopCart);
+
+    return response.status(200).json(shopCart);
+  }
 }
 
 export { ShopCartController };

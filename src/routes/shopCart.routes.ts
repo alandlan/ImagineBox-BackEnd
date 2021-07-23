@@ -13,4 +13,6 @@ shopCartRouter.post(
   shopCartController.AddItem
 );
 
+shopCartRouter.get("/", ensureAuthenticated, shopCartController.FindByUserId);
+
 export { shopCartRouter };
