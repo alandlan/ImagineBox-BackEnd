@@ -28,6 +28,11 @@ interface IResponse {
   refreshToken: string;
 }
 
+interface ITokenResponse {
+  NewToken: string;
+  RefreshToken: string;
+}
+
 @injectable()
 class AuthenticateService {
   constructor(
@@ -92,7 +97,7 @@ class AuthenticateService {
     return tokenReturn;
   }
 
-  async RefreshToken(token: string): Promise<string> {
+  async RefreshToken(token: string): Promise<ITokenResponse> {
     const { email, sub } = verify(token, auth.SecretRefreshToken) as IPayload;
 
     const UserId = sub;
@@ -105,9 +110,6 @@ class AuthenticateService {
     if (!userToken) {
       throw new AppError("Refresh Token does not exists!", 404);
     }
-
-    console.log(userToken.Id);
-
     await this.userTokenRepository.DeleteById(userToken.Id);
 
     const RefreshToken = sign({ email }, auth.SecretRefreshToken, {
@@ -126,7 +128,15 @@ class AuthenticateService {
       App: "WEB",
     });
 
-    return RefreshToken;
+    const NewToken = sign({}, auth.SecretToken, {
+      subject: UserId,
+      expiresIn: auth.ExpiresInToken,
+    });
+
+    return {
+      NewToken,
+      RefreshToken,
+    };
   }
 }
 
