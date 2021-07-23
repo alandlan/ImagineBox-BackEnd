@@ -11,7 +11,7 @@ interface IUserRepository {
     document,
     phone,
     mobile,
-  }: ICreateUserDTO): Promise<void>;
+  }: ICreateUserDTO): Promise<User>;
   FindByEmail(email: string): Promise<User | undefined>;
   FindById(id: string): Promise<User | undefined>;
   Update({ id, phone, mobile }: IUpdateUserDTO): Promise<User>;
