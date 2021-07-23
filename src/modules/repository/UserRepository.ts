@@ -39,7 +39,7 @@ class UserRepository implements IUserRepository {
     document,
     phone,
     mobile,
-  }: ICreateUserDTO): Promise<void> {
+  }: ICreateUserDTO): Promise<User> {
     const user = this.repository.create({
       Name: name,
       Email: email,
@@ -53,6 +53,8 @@ class UserRepository implements IUserRepository {
     });
 
     await this.repository.save(user);
+
+    return user;
   }
 
   async Update({ id, phone, mobile }: IUpdateUserDTO): Promise<User> {

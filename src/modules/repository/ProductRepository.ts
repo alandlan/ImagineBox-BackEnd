@@ -23,12 +23,6 @@ class ProductRepository implements IProductRepository {
   }
 
   async FindByName(Name: string): Promise<Product[]> {
-    // const products = await this.repository.find({
-    //   relations: ["Category"],
-    //   where: {
-    //     Name: Raw((alias) => `${alias} ILIKE '%${Name}%'`),
-    //   },
-    // });
     const products = await this.repository
       .createQueryBuilder("p")
       .innerJoinAndSelect("p.Category", "Category")

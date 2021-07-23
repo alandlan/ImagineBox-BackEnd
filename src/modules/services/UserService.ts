@@ -6,13 +6,16 @@ import { AppError } from "../../errors/AppError";
 import { ICreateUserDTO } from "../dtos/ICreateUserDto";
 import { IUpdateUserDTO } from "../dtos/IUpdateUserDto";
 import { User } from "../models/User";
+import { IShopCartRepository } from "../repository/interface/IShopCartRepository";
 import { IUserRepository } from "../repository/interface/IUserRepository";
 
 @injectable()
 class UserService {
   constructor(
     @inject("UserRepository")
-    private userRepository: IUserRepository
+    private userRepository: IUserRepository,
+    @inject("ShopCartRepository")
+    private shopCartRepository: IShopCartRepository
   ) {}
 
   async FindById(id: string): Promise<User> {
@@ -50,7 +53,7 @@ class UserService {
 
     const passwordHash = await hash(password, 8);
 
-    await this.userRepository.Create({
+    const userNew = await this.userRepository.Create({
       name,
       password: passwordHash,
       email,
@@ -59,6 +62,8 @@ class UserService {
       phone,
       mobile,
     });
+
+    await this.shopCartRepository.Create({ UserId: userNew.Id });
   }
 
   async Update({ id, mobile, phone }: IUpdateUserDTO): Promise<User> {
