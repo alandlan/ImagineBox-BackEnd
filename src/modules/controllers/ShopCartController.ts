@@ -11,8 +11,6 @@ class ShopCartController {
 
     const ProductId = String(Id);
 
-    console.log(ProductId);
-
     const shopCartService = container.resolve(ShopCartService);
 
     await shopCartService.AddItem({ UserId, ProductId, Quantity });
@@ -25,12 +23,13 @@ class ShopCartController {
   async RemoveItem(request: Request, response: Response): Promise<Response> {
     const { id: UserId } = request.user;
     const { Id } = request.params;
+    const { Quantity } = request.body;
 
     const ProductId = String(Id);
 
     const shopCartService = container.resolve(ShopCartService);
 
-    await shopCartService.RemoveItem(UserId, ProductId as string);
+    await shopCartService.RemoveItem({ UserId, Quantity, ProductId });
 
     return response
       .status(202)

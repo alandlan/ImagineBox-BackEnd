@@ -10,6 +10,9 @@ class ShopItemCartRepository implements IShopItemCartRepository {
   constructor() {
     this.repository = getRepository(ShopItemCart);
   }
+  async UpdateItem(ShopItemCart: ShopItemCart): Promise<void> {
+    await this.repository.save(ShopItemCart);
+  }
   async RemoveItem(ShopCartId: string, ProductId: string): Promise<void> {
     await this.repository
       .createQueryBuilder()
