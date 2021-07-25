@@ -37,6 +37,25 @@ class ShopCartService {
     });
   }
 
+  async RemoveItem(UserId: string, ProductId: string): Promise<void> {
+    const shopCart = await this.shopCartRepository.FindByUserId(UserId);
+
+    if (shopCart.ItensCart.length > 0) {
+      const product = shopCart.ItensCart.map((item) => {
+        if (item.ProductId === ProductId) return item.Product;
+
+        return undefined;
+      });
+
+      if (product !== undefined) {
+        await this.shopItemCartRepository.RemoveItem(
+          shopCart.Id,
+          String(product[0]?.Id)
+        );
+      }
+    }
+  }
+
   async FindByUserId(UserId: string): Promise<ShopCart> {
     const shopCart = await this.shopCartRepository.FindByUserId(UserId);
 
@@ -46,7 +65,8 @@ class ShopCartService {
   async Reset(UserId: string): Promise<void> {
     const shopCart = await this.shopCartRepository.FindByUserId(UserId);
 
-    await this.shopItemCartRepository.Reset(shopCart.Id);
+    if (shopCart.ItensCart.length > 0)
+      await this.shopItemCartRepository.Reset(shopCart.Id);
   }
 }
 

@@ -8,13 +8,19 @@ const shopCartRouter = Router();
 const shopCartController = new ShopCartController();
 
 shopCartRouter.post(
-  "/AddItem",
+  "/AddItem/:Id",
   ensureAuthenticated,
   shopCartController.AddItem
 );
 
+shopCartRouter.post(
+  "/RemoveItem/:Id",
+  ensureAuthenticated,
+  shopCartController.RemoveItem
+);
+
 shopCartRouter.get("/", ensureAuthenticated, shopCartController.FindByUserId);
 
-shopCartRouter.post("/Reset", ensureAuthenticated, shopCartController.Reset);
+shopCartRouter.delete("/Reset", ensureAuthenticated, shopCartController.Reset);
 
 export { shopCartRouter };

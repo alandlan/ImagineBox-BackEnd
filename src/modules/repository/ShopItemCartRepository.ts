@@ -10,17 +10,23 @@ class ShopItemCartRepository implements IShopItemCartRepository {
   constructor() {
     this.repository = getRepository(ShopItemCart);
   }
+  async RemoveItem(ShopCartId: string, ProductId: string): Promise<void> {
+    await this.repository
+      .createQueryBuilder()
+      .delete()
+      .where("ShopCartId = :ShopCartId and ProductId = :ProductId", {
+        ShopCartId,
+        ProductId,
+      })
+      .execute();
+  }
 
   async Reset(ShopCartId: string): Promise<void> {
-    try {
-      await this.repository
-        .createQueryBuilder()
-        .delete()
-        .where("ShopCartId = :ShopCartId", { ShopCartId })
-        .execute();
-    } catch (error) {
-      console.log(error);
-    }
+    await this.repository
+      .createQueryBuilder()
+      .delete()
+      .where("ShopCartId = :ShopCartId", { ShopCartId })
+      .execute();
   }
 
   async AddItem({

@@ -6,7 +6,12 @@ import { ShopCartService } from "../services/ShopCartService";
 class ShopCartController {
   async AddItem(request: Request, response: Response): Promise<Response> {
     const { id: UserId } = request.user;
-    const { ProductId, Quantity } = request.body;
+    const { Id } = request.params;
+    const { Quantity } = request.body;
+
+    const ProductId = String(Id);
+
+    console.log(ProductId);
 
     const shopCartService = container.resolve(ShopCartService);
 
@@ -15,6 +20,21 @@ class ShopCartController {
     return response
       .status(202)
       .json({ message: "Produto adicionado ao Carrinho!" });
+  }
+
+  async RemoveItem(request: Request, response: Response): Promise<Response> {
+    const { id: UserId } = request.user;
+    const { Id } = request.params;
+
+    const ProductId = String(Id);
+
+    const shopCartService = container.resolve(ShopCartService);
+
+    await shopCartService.RemoveItem(UserId, ProductId as string);
+
+    return response
+      .status(202)
+      .json({ message: "Produto removido do Carrinho!" });
   }
 
   async FindByUserId(request: Request, response: Response): Promise<Response> {
