@@ -24,9 +24,17 @@ class ShopCartController {
 
     const shopCart = await shopCartService.FindByUserId(UserId);
 
-    console.log(shopCart);
-
     return response.status(200).json(shopCart);
+  }
+
+  async Reset(request: Request, response: Response): Promise<Response> {
+    const { id: UserId } = request.user;
+
+    const shopCartService = container.resolve(ShopCartService);
+
+    await shopCartService.Reset(UserId);
+
+    return response.status(200).json({ message: "Carrinho limpo!" });
   }
 }
 

@@ -40,9 +40,13 @@ class ShopCartService {
   async FindByUserId(UserId: string): Promise<ShopCart> {
     const shopCart = await this.shopCartRepository.FindByUserId(UserId);
 
-    console.log(shopCart);
-
     return shopCart;
+  }
+
+  async Reset(UserId: string): Promise<void> {
+    const shopCart = await this.shopCartRepository.FindByUserId(UserId);
+
+    await this.shopItemCartRepository.Reset(shopCart.Id);
   }
 }
 
