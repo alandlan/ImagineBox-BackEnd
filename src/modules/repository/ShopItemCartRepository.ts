@@ -11,6 +11,18 @@ class ShopItemCartRepository implements IShopItemCartRepository {
     this.repository = getRepository(ShopItemCart);
   }
 
+  async Reset(ShopCartId: string): Promise<void> {
+    try {
+      await this.repository
+        .createQueryBuilder()
+        .delete()
+        .where("ShopCartId = :ShopCartId", { ShopCartId })
+        .execute();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   async AddItem({
     Id,
     ProductId,

@@ -13,12 +13,12 @@ class ShopCartRepository implements IShopCartRepository {
   async FindByUserId(UserId: string): Promise<ShopCart> {
     const shopCart = await this.repository
       .createQueryBuilder("ShopCart")
-      .innerJoinAndSelect(
+      .leftJoinAndSelect(
         "ShopCart.ItensCart",
         "ItemCart"
         // "ItemCart.ShopCartId = ShopCart.Id"
       )
-      .innerJoinAndSelect(
+      .leftJoinAndSelect(
         "ItemCart.Product",
         "Product"
         // "Product.Id = ItemCart.ProductId"

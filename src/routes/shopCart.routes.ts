@@ -15,4 +15,6 @@ shopCartRouter.post(
 
 shopCartRouter.get("/", ensureAuthenticated, shopCartController.FindByUserId);
 
+shopCartRouter.post("/Reset", ensureAuthenticated, shopCartController.Reset);
+
 export { shopCartRouter };
