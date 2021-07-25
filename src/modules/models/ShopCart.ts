@@ -1,13 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToOne,
-  OneToMany,
-  OneToOne,
-  PrimaryColumn,
-} from "typeorm";
+import { Column, Entity, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 import { ShopItemCart } from "./ShopItemCart";
@@ -30,8 +21,8 @@ class ShopCart {
   @OneToOne(() => User)
   User!: string;
 
-  @OneToMany(() => ShopItemCart, (shopItemCart) => shopItemCart.ShopCart)
-  @JoinColumn({ name: "ShopCartId" })
+  @OneToMany(() => ShopItemCart, (ShopItemCart) => ShopItemCart.ShopCart)
+  // @JoinColumn({ name: "ShopItemCart" })
   ItensCart!: ShopItemCart[];
 }
 

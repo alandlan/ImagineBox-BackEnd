@@ -6,12 +6,14 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToOne,
   PrimaryColumn,
 } from "typeorm";
 import { v4 as uuidV4 } from "uuid";
 
 import { Catalogue } from "./Catalogue";
 import { Category } from "./Category";
+import { ShopItemCart } from "./ShopItemCart";
 
 @Entity("Product")
 class Product {
@@ -50,6 +52,9 @@ class Product {
     inverseJoinColumns: [{ name: "CatalogueId" }],
   })
   Catalogues!: Catalogue[];
+
+  @OneToOne(() => ShopItemCart, (ShopItemCart) => ShopItemCart.Product)
+  ShopItemCart!: ShopItemCart;
 
   constructor() {
     if (!this.Id) {
