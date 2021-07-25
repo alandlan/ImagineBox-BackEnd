@@ -17,8 +17,6 @@ class UserAddressRepository implements IUserAddressRepository {
   }
 
   async Delete(Id: string): Promise<void> {
-    console.log(Id);
-
     await this.repository.delete({ Id });
   }
 
