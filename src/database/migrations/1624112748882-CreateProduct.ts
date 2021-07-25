@@ -26,7 +26,7 @@ export class CreateProduct1624112748882 implements MigrationInterface {
           },
           {
             name: "Price",
-            type: "money",
+            type: "numeric",
           },
           {
             name: "CategoryId",

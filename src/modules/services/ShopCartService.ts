@@ -1,5 +1,7 @@
 import { inject, injectable } from "tsyringe";
 
+import { AppError } from "../../errors/AppError";
+import { Product } from "../models/Product";
 import { ShopCart } from "../models/ShopCart";
 import { IShopCartRepository } from "../repository/interface/IShopCartRepository";
 import { IShopItemCartRepository } from "../repository/interface/IShopItemCartRepository";
@@ -26,7 +28,7 @@ class ShopCartService {
   async AddItem({ UserId, Quantity, ProductId }: IRequestItem): Promise<void> {
     const shopCart = await this.shopCartRepository.FindByUserId(UserId);
 
-    const shopItemCart = shopCart.ItensCart.map((item) => {
+    const shopItemCart = shopCart.ItensCart.filter((item) => {
       if (item.ProductId === ProductId) return item;
 
       return undefined;
@@ -38,9 +40,7 @@ class ShopCartService {
     ) {
       const product = shopItemCart[0];
 
-      product.Quantity = Quantity;
-
-      console.log(product);
+      product.Quantity += Quantity;
 
       await this.shopItemCartRepository.UpdateItem(product);
     } else {
@@ -60,23 +60,55 @@ class ShopCartService {
     const shopCart = await this.shopCartRepository.FindByUserId(UserId);
 
     if (shopCart.ItensCart.length > 0) {
-      const product = shopCart.ItensCart.map((item) => {
-        if (item.ProductId === ProductId) return item.Product;
+      const shopItemCart = shopCart.ItensCart.filter((item) => {
+        if (item.ProductId === ProductId) return item;
 
         return undefined;
       });
 
-      if (product !== undefined) {
-        await this.shopItemCartRepository.RemoveItem(
-          shopCart.Id,
-          String(product[0]?.Id)
-        );
+      // produto existe no carrinho
+      if (shopItemCart !== undefined) {
+        if (Quantity > 0) {
+          if (Quantity > Number(shopItemCart[0]?.Quantity)) {
+            throw new AppError(
+              `Quantidade superior a ${String(shopItemCart[0]?.Quantity)}`,
+              400
+            );
+          } else if (Quantity === Number(shopItemCart[0]?.Quantity)) {
+            await this.shopItemCartRepository.RemoveItem(
+              shopCart.Id,
+              shopItemCart[0].ProductId
+            );
+          } else {
+            const itemCart = shopItemCart[0];
+            itemCart!.Quantity -= Quantity;
+
+            await this.shopItemCartRepository.UpdateItem(itemCart!);
+          }
+        } else {
+          await this.shopItemCartRepository.RemoveItem(
+            shopCart.Id,
+            shopItemCart[0].ProductId
+          );
+        }
       }
     }
   }
 
   async FindByUserId(UserId: string): Promise<ShopCart> {
     const shopCart = await this.shopCartRepository.FindByUserId(UserId);
+
+    let total = 0.0;
+
+    shopCart.ItensCart.forEach((item) => {
+      console.log(item.Quantity);
+      console.log(Number(String(item.Product.Price).replace("$", "")));
+      total += item.Quantity * item.Product.Price;
+    });
+
+    console.log(total);
+
+    shopCart.Total = total;
 
     return shopCart;
   }

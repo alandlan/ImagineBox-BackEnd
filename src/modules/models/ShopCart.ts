@@ -18,6 +18,8 @@ class ShopCart {
   @Column()
   UserId!: string;
 
+  Total!: number;
+
   @OneToOne(() => User)
   User!: string;
 

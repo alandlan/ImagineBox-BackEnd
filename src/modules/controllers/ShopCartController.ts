@@ -15,9 +15,11 @@ class ShopCartController {
 
     await shopCartService.AddItem({ UserId, ProductId, Quantity });
 
+    const shopCart = await shopCartService.FindByUserId(UserId);
+
     return response
       .status(202)
-      .json({ message: "Produto adicionado ao Carrinho!" });
+      .json({ message: "Produto adicionado ao Carrinho!", shopCart });
   }
 
   async RemoveItem(request: Request, response: Response): Promise<Response> {
@@ -31,9 +33,11 @@ class ShopCartController {
 
     await shopCartService.RemoveItem({ UserId, Quantity, ProductId });
 
+    const shopCart = await shopCartService.FindByUserId(UserId);
+
     return response
       .status(202)
-      .json({ message: "Produto removido do Carrinho!" });
+      .json({ message: "Produto removido do Carrinho!", shopCart });
   }
 
   async FindByUserId(request: Request, response: Response): Promise<Response> {
@@ -53,7 +57,9 @@ class ShopCartController {
 
     await shopCartService.Reset(UserId);
 
-    return response.status(200).json({ message: "Carrinho limpo!" });
+    const shopCart = await shopCartService.FindByUserId(UserId);
+
+    return response.status(200).json({ message: "Carrinho limpo!", shopCart });
   }
 }
 
