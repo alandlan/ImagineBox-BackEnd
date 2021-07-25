@@ -11,7 +11,21 @@ class ShopCartRepository implements IShopCartRepository {
     this.repository = getRepository(ShopCart);
   }
   async FindByUserId(UserId: string): Promise<ShopCart> {
-    const shopCart = await this.repository.findOne({ UserId });
+    const shopCart = await this.repository
+      .createQueryBuilder("ShopCart")
+      .innerJoinAndSelect(
+        "ShopCart.ItensCart",
+        "ItemCart"
+        // "ItemCart.ShopCartId = ShopCart.Id"
+      )
+      .innerJoinAndSelect(
+        "ItemCart.Product",
+        "Product"
+        // "Product.Id = ItemCart.ProductId"
+      )
+      .where("ShopCart.UserId = :UserId", { UserId })
+      .getOne();
+
     return shopCart!;
   }
 

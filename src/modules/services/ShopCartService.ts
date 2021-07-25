@@ -1,5 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
+import { ShopCart } from "../models/ShopCart";
 import { IShopCartRepository } from "../repository/interface/IShopCartRepository";
 import { IShopItemCartRepository } from "../repository/interface/IShopItemCartRepository";
 
@@ -34,6 +35,14 @@ class ShopCartService {
       ProductId,
       Quantity,
     });
+  }
+
+  async FindByUserId(UserId: string): Promise<ShopCart> {
+    const shopCart = await this.shopCartRepository.FindByUserId(UserId);
+
+    console.log(shopCart);
+
+    return shopCart;
   }
 }
 

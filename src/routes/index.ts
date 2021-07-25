@@ -5,6 +5,7 @@ import { catalogueRouter } from "./catalogue.routes";
 import { categoryRouter } from "./category.routes";
 import { productRouter } from "./product.routes";
 import { productsRouter } from "./products.routes";
+import { shopCartRouter } from "./shopCart.routes";
 import { userRouter } from "./user.routes";
 import { userAddressRoutes } from "./userAddress.routes";
 import { usersRouter } from "./users.routes";
@@ -18,6 +19,7 @@ router.use("/product", productRouter);
 router.use("/products", productsRouter);
 router.use("/catalogue", catalogueRouter);
 router.use("/useraddress", userAddressRoutes);
+router.use("/shopCart", shopCartRouter);
 router.use(authenticateRouter);
 
 export { router };
