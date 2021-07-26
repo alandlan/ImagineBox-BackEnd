@@ -1,7 +1,6 @@
 import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../errors/AppError";
-import { Product } from "../models/Product";
 import { ShopCart } from "../models/ShopCart";
 import { IShopCartRepository } from "../repository/interface/IShopCartRepository";
 import { IShopItemCartRepository } from "../repository/interface/IShopItemCartRepository";
@@ -101,13 +100,8 @@ class ShopCartService {
     let total = 0.0;
 
     shopCart.ItensCart.forEach((item) => {
-      console.log(item.Quantity);
-      console.log(Number(String(item.Product.Price).replace("$", "")));
       total += item.Quantity * item.Product.Price;
     });
-
-    console.log(total);
-
     shopCart.Total = total;
 
     return shopCart;
