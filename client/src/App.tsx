@@ -1,12 +1,7 @@
 import { useEffect } from 'react';
 import { Header } from './components/header';
 import {api} from './services/api'
-
-import styled from 'styled-components'
-
-const Title = styled.h1`
-  color: #8257e6;
-`
+import { GlobalStyle } from './styles/global';
 
 export function App() {
 
@@ -17,7 +12,8 @@ export function App() {
   return (
     <>
       <Header />
-      <Title >Hello Word</Title>
+      <h1 >Hello Word</h1>
+      <GlobalStyle/>
     </>
   );
 }
