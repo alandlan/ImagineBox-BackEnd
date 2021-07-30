@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Header } from './components/header';
 import {api} from './services/api'
 
 export function App() {
@@ -8,8 +9,9 @@ export function App() {
   },[])
 
   return (
-    <div className="App">
+    <>
+      <Header />
       <h1>Hello Word</h1>
-    </div>
+    </>
   );
 }
