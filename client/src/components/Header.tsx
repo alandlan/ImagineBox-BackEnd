@@ -1,5 +1,5 @@
-import { Flex, Text, Image, Input,Icon } from '@chakra-ui/react'
-import { RiSearchLine } from 'react-icons/ri'
+import { Flex, Text, Image, Input,Icon, HStack, Box, Avatar } from '@chakra-ui/react'
+import { RiNotificationLine, RiSearchLine, RiShoppingCartLine } from 'react-icons/ri'
 
 export function Header(){
     return (
@@ -14,18 +14,18 @@ export function Header(){
             align="center"
         >
 
-                <Text
-                    fontSize="3xl"
-                    fontWeight= "bold"
-                    letterSpacing="tight"
-                    w="64"
-                >ImagineBox
-                <Image src= "box-icon.png" boxSize="50px" display="inline"
-                    
-                />
-                </Text>
+            <Text
+                fontSize="3xl"
+                fontWeight= "bold"
+                letterSpacing="tight"
+                w="64"
+            >ImagineBox
+            <Image src= "box-icon.png" boxSize="50px" display="inline"
+                
+            />
+            </Text>
 
-                <Flex
+            <Flex
                     as="label"
                     flex="1"
                     py="4"
@@ -51,6 +51,32 @@ export function Header(){
                     <Icon as={RiSearchLine} fontSize="20"/>
                 </Flex>
 
+            <Flex
+                align="center"
+                ml="auto"
+            >
+                <HStack spacing="4"
+                mx="8"
+                pr="8"
+                py="1"
+                color="orange.300"
+                borderRightWidth={1}
+                borderColor="orange.700">
+                    <Icon as={RiNotificationLine} fontSize="20" />
+                    <Icon as={RiShoppingCartLine} fontSize="20" />
+                </HStack>
+
+                <Flex align="center" >
+                    <Box mr="4" textAlign="right">
+                        <Text>Alan Martins</Text>
+                        <Text color="orange.300" fontSize="small">
+                            alan4lann@gmail.com
+                        </Text>
+                    </Box>
+
+                    <Avatar size="md" name="Alan Martins" src="" />
+                </Flex>
+            </Flex>
         </Flex>
     )
 }
