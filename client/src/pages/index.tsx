@@ -8,6 +8,7 @@ export default function Home(){
       <Header />
       <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
         <SideBar />
+        <h1>Vitrine</h1>
       </Flex>
     </Flex>
   )
