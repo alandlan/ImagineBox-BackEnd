@@ -1,6 +1,14 @@
-import { Box, Button, Flex, Heading, Icon, SimpleGrid, Text, Image, Center } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, Icon, SimpleGrid, Text, Image, Center, Table,
+    Thead,
+    Tbody,
+    Tfoot,
+    Tr,
+    Th,
+    Td,
+    TableCaption, } from "@chakra-ui/react";
 import { RiAddLine, RiPriceTag3Fill } from "react-icons/ri";
 import { Header } from "../../components/Header";
+import { Pagination } from "../../components/Pagination";
 import { SideBar } from "../../components/Sidebar";
 
 export default function ProductList(){
@@ -53,7 +61,9 @@ export default function ProductList(){
                             <Text align="center" fontSize="20" p={2}>Miniatura DeadPool</Text>
                             <Text p={4}><Icon as={RiPriceTag3Fill} /> R$59,99</Text>   
                         </Box>
+                        
                     </SimpleGrid>
+                    <Pagination />
                 </Box>
             </Flex>
         </Box>
