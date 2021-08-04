@@ -1,16 +1,23 @@
 import { Image, Text } from "@chakra-ui/react";
 
-export function Logo(){
+interface LogoProps{
+    showLogoImg?: boolean,
+}
+
+export function Logo({showLogoImg = false}: LogoProps){
     return (
         <Text
-            fontSize="3xl"
+            fontSize={["2xl","3xl"]}
             fontWeight= "bold"
             letterSpacing="tight"
             w="64"
         >ImagineBox
-        <Image src= "box-icon.png" boxSize="50px" display="inline"
-            
-        />
+
+        {showLogoImg && (
+            <Image src= "box-icon.png" boxSize="50px" display="inline" />
+        )}
+
+        
         </Text>
 
     )

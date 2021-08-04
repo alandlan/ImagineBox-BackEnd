@@ -1,21 +1,40 @@
-import { Box, Stack } from "@chakra-ui/react";
-import { RiGift2Fill } from "react-icons/ri";
-import { NavLink } from "./NavLink";
-import { NavSection } from "./NavSection";
+import { Box, Button, Drawer, DrawerBody, DrawerCloseButton, DrawerContent, DrawerFooter, DrawerHeader, DrawerOverlay, Flex, useBreakpointValue } from "@chakra-ui/react";
+import { useSidebarDrawer } from "../../context/SidebarDrawerContext";
+import { SidebarNav } from "./SidebarNav";
 
 export function SideBar(){
+
+    const { isOpen, onClose} = useSidebarDrawer()
+    
+    const isDrawerSidebar = useBreakpointValue({
+        base: false,
+        lg: true
+    })
+
+    if(!isDrawerSidebar){
+        return (
+            <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+                <DrawerOverlay>
+                    <DrawerContent bg="orange.200" p="4">
+                        <DrawerCloseButton mt="6" />
+                        <DrawerHeader>Navegação</DrawerHeader>
+
+                        <DrawerBody>
+                            <SidebarNav />
+                        </DrawerBody>
+                        <DrawerFooter>
+                            <Button>Teste</Button>
+                        </DrawerFooter>
+                    </DrawerContent>
+                    
+                </DrawerOverlay>
+            </Drawer> 
+        )
+    }
+
     return (
         <Box as="aside" w="64" mr="8">
-            <Stack spacing="12" align="flex-start">
-                <NavSection title="COLECIONÁVEIS">
-                    <NavLink icon={RiGift2Fill}>Marvel</NavLink>
-                    <NavLink icon={RiGift2Fill}>DC</NavLink>
-                </NavSection>
-                <NavSection title="TABULEIROS">
-                    <NavLink icon={RiGift2Fill}>Dangers&Dragons</NavLink>
-                </NavSection>
-                
-            </Stack>
+            <SidebarNav />
         </Box>
     )
 }
