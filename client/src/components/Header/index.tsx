@@ -29,7 +29,7 @@ export function Header(){
             align="center"
         >
             
-            { isWideVersion && (
+            { !isWideVersion && (
                 <IconButton 
                     aria-label="Open Navigation"
                     icon={<Icon as={RiMenuLine} />}
