@@ -18,7 +18,7 @@ catalogueRouter.post(
 catalogueRouter.get("/", catalogueController.FindByName);
 
 catalogueRouter.post(
-  "/:Id",
+  "/:Id/add",
   ensureAuthenticated,
   ensureAdmin,
   catalogueController.UpdateCatalogues

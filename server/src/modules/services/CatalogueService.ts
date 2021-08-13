@@ -45,7 +45,9 @@ class CatalogueService {
     CatalogueId,
     ProductIds,
   }: IRequestUpdateCatalogues): Promise<Catalogue> {
-    const catalogue = await this.catalogueRepository.FindById(CatalogueId);
+    const catalogue = await this.catalogueRepository.FindProducts(CatalogueId);
+
+    console.log(catalogue);
 
     if (!catalogue) {
       throw new AppError("Catalogo não encontrado!", 404);
@@ -57,7 +59,9 @@ class CatalogueService {
       throw new AppError("Produto(s) não encontrado!", 404);
     }
 
-    catalogue.Products = products;
+    products.forEach((product) => {
+      catalogue.Products.push(product);
+    });
 
     const catalogueUpdated = await this.catalogueRepository.Create(catalogue);
 
