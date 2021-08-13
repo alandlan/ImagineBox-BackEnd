@@ -36,7 +36,7 @@ class CatalogueController {
 
     const catalogueService = container.resolve(CatalogueService);
 
-    const catalogues = await catalogueService.UpdateCatalogues({
+    const catalogues = await catalogueService.AddProducts({
       CatalogueId: Id,
       ProductIds,
     });

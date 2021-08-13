@@ -41,13 +41,11 @@ class CatalogueService {
     return catalogue;
   }
 
-  async UpdateCatalogues({
+  async AddProducts({
     CatalogueId,
     ProductIds,
   }: IRequestUpdateCatalogues): Promise<Catalogue> {
     const catalogue = await this.catalogueRepository.FindProducts(CatalogueId);
-
-    console.log(catalogue);
 
     if (!catalogue) {
       throw new AppError("Catalogo não encontrado!", 404);
