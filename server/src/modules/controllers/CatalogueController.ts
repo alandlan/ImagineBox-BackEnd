@@ -27,7 +27,21 @@ class CatalogueController {
     return response.status(200).json(catalogue);
   }
 
-  async UpdateCatalogues(
+  async AddProducts(request: Request, response: Response): Promise<Response> {
+    const { Id } = request.params;
+    const { ProductIds } = request.body;
+
+    const catalogueService = container.resolve(CatalogueService);
+
+    const catalogues = await catalogueService.AddProducts({
+      CatalogueId: Id,
+      ProductIds,
+    });
+
+    return response.status(201).json(catalogues);
+  }
+
+  async RemoveProducts(
     request: Request,
     response: Response
   ): Promise<Response> {
@@ -36,7 +50,7 @@ class CatalogueController {
 
     const catalogueService = container.resolve(CatalogueService);
 
-    const catalogues = await catalogueService.AddProducts({
+    const catalogues = await catalogueService.RemoveProducts({
       CatalogueId: Id,
       ProductIds,
     });

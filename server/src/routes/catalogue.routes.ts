@@ -21,7 +21,14 @@ catalogueRouter.post(
   "/:Id/add",
   ensureAuthenticated,
   ensureAdmin,
-  catalogueController.UpdateCatalogues
+  catalogueController.AddProducts
+);
+
+catalogueRouter.post(
+  "/:Id/remove",
+  ensureAuthenticated,
+  ensureAdmin,
+  catalogueController.RemoveProducts
 );
 
 catalogueRouter.get("/:Id/products", catalogueController.FindProducts);

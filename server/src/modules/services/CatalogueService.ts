@@ -66,6 +66,34 @@ class CatalogueService {
     return catalogueUpdated;
   }
 
+  async RemoveProducts({
+    CatalogueId,
+    ProductIds,
+  }: IRequestUpdateCatalogues): Promise<Catalogue> {
+    const catalogue = await this.catalogueRepository.FindProducts(CatalogueId);
+
+    if (!catalogue) {
+      throw new AppError("Catalogo não encontrado!", 404);
+    }
+
+    const products = await this.productRepository.FindByIds(ProductIds);
+
+    if (!products || products.length !== ProductIds.length) {
+      throw new AppError("Produto(s) não encontrado!", 404);
+    }
+
+    products.forEach((product) => {
+      catalogue.Products.forEach((cProduct, indexCatalogueProduct) => {
+        if (cProduct.Id === product.Id)
+          catalogue.Products.splice(indexCatalogueProduct, 1);
+      });
+    });
+
+    const catalogueUpdated = await this.catalogueRepository.Create(catalogue);
+
+    return catalogueUpdated;
+  }
+
   async FindProducts(Id: string): Promise<Catalogue> {
     const catalogue = await this.catalogueRepository.FindProducts(Id);
 
