@@ -22,9 +22,7 @@ export function SideBar(){
                         <DrawerBody>
                             <SidebarNav />
                         </DrawerBody>
-                        <DrawerFooter>
-                            <Button>Teste</Button>
-                        </DrawerFooter>
+                        
                     </DrawerContent>
                     
                 </DrawerOverlay>
