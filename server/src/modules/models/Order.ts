@@ -1,5 +1,14 @@
-import { Column, CreateDateColumn, Entity, PrimaryColumn } from "typeorm";
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryColumn,
+} from "typeorm";
 import { v4 as uuidV4 } from "uuid";
+
+import { OrderItem } from "./OrderItem";
 
 @Entity("Order")
 class Order {
@@ -38,6 +47,10 @@ class Order {
 
   @Column()
   State!: string;
+
+  @OneToMany(() => OrderItem, (OrderItem) => OrderItem.Order)
+  @JoinColumn({ name: "OrderId" })
+  Products!: OrderItem[];
 
   constructor() {
     if (!this.Id) {
