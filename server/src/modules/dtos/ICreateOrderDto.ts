@@ -1,7 +1,8 @@
-interface ICreateUserAddressDTO {
-  Id?: string;
+interface ICreateOrderDTO {
+  OrderStatusId: number;
   UserId: string;
-  Description: string;
+  Price: number;
+  ExpectedDate: Date;
   PostalCode: string;
   StreetName: string;
   Number: string;
@@ -11,4 +12,4 @@ interface ICreateUserAddressDTO {
   State: string;
 }
 
-export { ICreateUserAddressDTO };
+export { ICreateOrderDTO };

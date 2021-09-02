@@ -29,7 +29,7 @@ class OrderService {
     const shopCart = await this.shopCartRepository.FindByUserId(UserId);
 
     if (shopCart.ItensCart.length === 0)
-      throw new AppError("Carrinho vazio!", 200);
+      throw new AppError("Carrinho vazio!", 400);
 
     const order = new Order();
 

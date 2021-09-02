@@ -25,6 +25,7 @@ class UserAddressRepository implements IUserAddressRepository {
       UserId: Data.UserId,
       Description: Data.Description,
       PostalCode: Data.PostalCode,
+      StreetName: Data.StreetName,
       Number: Data.Number,
       Complement: Data.Complement,
       Neighborhood: Data.Neighborhood,

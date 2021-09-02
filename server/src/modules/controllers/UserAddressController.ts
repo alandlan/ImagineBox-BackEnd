@@ -9,6 +9,7 @@ class UserAddressController {
     const {
       Description,
       PostalCode,
+      StreetName,
       Number,
       Complement,
       Neighborhood,
@@ -22,6 +23,7 @@ class UserAddressController {
       UserId: id,
       Description,
       PostalCode,
+      StreetName,
       Number,
       Complement,
       Neighborhood,

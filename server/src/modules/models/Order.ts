@@ -34,6 +34,9 @@ class Order {
   PostalCode!: string;
 
   @Column()
+  StreetName!: string;
+
+  @Column()
   Number!: string;
 
   @Column()

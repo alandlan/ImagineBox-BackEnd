@@ -29,6 +29,10 @@ export class UserAddress1625570523588 implements MigrationInterface {
             type: "varchar",
           },
           {
+            name: "StreetName",
+            type: "varchar",
+          },
+          {
             name: "Number",
             type: "varchar",
           },
