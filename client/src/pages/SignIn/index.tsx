@@ -4,7 +4,7 @@ import { Input } from '../../components/Form/Input'
 export default function SignIn() {
   return (
     <Flex w="100wh" h="100vh" align="center" justify="center">
-      <Flex 
+      <Flex
         as="form" 
         width="100%" 
         maxWidth={360}
