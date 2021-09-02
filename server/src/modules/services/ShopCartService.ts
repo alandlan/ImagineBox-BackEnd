@@ -66,7 +66,8 @@ class ShopCartService {
       });
 
       // produto existe no carrinho
-      if (shopItemCart !== undefined) {
+      if (shopItemCart !== undefined && shopItemCart.length > 0) {
+        console.log(shopItemCart);
         if (Quantity > 0) {
           if (Quantity > Number(shopItemCart[0]?.Quantity)) {
             throw new AppError(
@@ -90,6 +91,8 @@ class ShopCartService {
             shopItemCart[0].ProductId
           );
         }
+      } else {
+        throw new AppError("Produto não localizado no carrinho!", 404);
       }
     }
   }
@@ -103,8 +106,6 @@ class ShopCartService {
       total += item.Quantity * item.Product.Price;
     });
     shopCart.Total = total;
-
-    console.log(shopCart);
 
     return shopCart;
   }
