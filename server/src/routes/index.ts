@@ -3,6 +3,7 @@ import { Router } from "express";
 import { authenticateRouter } from "./authenticate.routes";
 import { catalogueRouter } from "./catalogue.routes";
 import { categoryRouter } from "./category.routes";
+import { orderRouter } from "./order.routes";
 import { productRouter } from "./product.routes";
 import { productsRouter } from "./products.routes";
 import { shopCartRouter } from "./shopCart.routes";
@@ -20,6 +21,7 @@ router.use("/products", productsRouter);
 router.use("/catalogue", catalogueRouter);
 router.use("/useraddress", userAddressRoutes);
 router.use("/shopCart", shopCartRouter);
+router.use("/order", orderRouter);
 router.use(authenticateRouter);
 
 export { router };

@@ -104,6 +104,8 @@ class ShopCartService {
     });
     shopCart.Total = total;
 
+    console.log(shopCart);
+
     return shopCart;
   }
 
