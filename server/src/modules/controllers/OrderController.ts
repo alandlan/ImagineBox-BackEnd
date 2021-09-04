@@ -10,9 +10,9 @@ class OrderController {
 
     const orderService = container.resolve(OrderService);
 
-    const shopcart = await orderService.CloseOrder(UserId, AddressId);
+    const order = await orderService.CloseOrder(UserId, AddressId);
 
-    return response.status(200).json(shopcart);
+    return response.status(200).json(order);
   }
 }
 

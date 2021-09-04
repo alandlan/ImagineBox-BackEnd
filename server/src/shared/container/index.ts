@@ -4,12 +4,16 @@ import { CatalogueRepository } from "../../modules/repository/CatalogueRepositor
 import { CategoryRepository } from "../../modules/repository/CategoryRepository";
 import { ICatalogueRepository } from "../../modules/repository/interface/ICatalogueRepository";
 import { ICategoryRepository } from "../../modules/repository/interface/ICategoryRepository";
+import { IOrderItemRepository } from "../../modules/repository/interface/IOrderItemRepository";
+import { IOrderRepository } from "../../modules/repository/interface/IOrderRepository";
 import { IProductRepository } from "../../modules/repository/interface/IProductRepository";
 import { IShopCartRepository } from "../../modules/repository/interface/IShopCartRepository";
 import { IShopItemCartRepository } from "../../modules/repository/interface/IShopItemCartRepository";
 import { IUserAddressRepository } from "../../modules/repository/interface/IUserAddressRepository";
 import { IUserRepository } from "../../modules/repository/interface/IUserRepository";
 import { IUserTokenRepository } from "../../modules/repository/interface/IUserTokenRepository";
+import { OrderItemRepository } from "../../modules/repository/OrderItemRepository";
+import { OrderRepository } from "../../modules/repository/OrderRepository";
 import { ProductRepository } from "../../modules/repository/ProductRepository";
 import { ShopCartRepository } from "../../modules/repository/ShopCartRepository";
 import { ShopItemCartRepository } from "../../modules/repository/ShopItemCartRepository";
@@ -54,4 +58,14 @@ container.registerSingleton<IShopCartRepository>(
 container.registerSingleton<IShopItemCartRepository>(
   "ShopItemCartRepository",
   ShopItemCartRepository
+);
+
+container.registerSingleton<IOrderRepository>(
+  "OrderRepository",
+  OrderRepository
+);
+
+container.registerSingleton<IOrderItemRepository>(
+  "OrderItemRepository",
+  OrderItemRepository
 );

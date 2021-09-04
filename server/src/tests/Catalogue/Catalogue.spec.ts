@@ -1,3 +1,4 @@
+/* eslint-disable import-helpers/order-imports */
 import { AppError } from "../../errors/AppError";
 import { CatalogueService } from "../../modules/services/CatalogueService";
 import { CatalogueRepositoryInMemory } from "../repositories/CatalogueRepositoryInMemory";

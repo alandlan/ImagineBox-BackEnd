@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@types/reflect-metadata": "^0.1.0"
+  },
+  "dependencies": {
+    "reflect-metadata": "^0.1.13"
+  }
+}
