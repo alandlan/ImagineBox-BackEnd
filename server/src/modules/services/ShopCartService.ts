@@ -2,6 +2,7 @@ import { inject, injectable } from "tsyringe";
 
 import { AppError } from "../../errors/AppError";
 import { ShopCart } from "../models/ShopCart";
+import { IProductRepository } from "../repository/interface/IProductRepository";
 import { IShopCartRepository } from "../repository/interface/IShopCartRepository";
 import { IShopItemCartRepository } from "../repository/interface/IShopItemCartRepository";
 
@@ -17,7 +18,9 @@ class ShopCartService {
     @inject("ShopCartRepository")
     private shopCartRepository: IShopCartRepository,
     @inject("ShopItemCartRepository")
-    private shopItemCartRepository: IShopItemCartRepository
+    private shopItemCartRepository: IShopItemCartRepository,
+    @inject("ProductRepository")
+    private productRepository: IProductRepository
   ) {}
 
   async Create(UserId: string): Promise<void> {
@@ -32,6 +35,10 @@ class ShopCartService {
 
       return undefined;
     });
+
+    const product = await this.productRepository.FindById(ProductId);
+
+    if (!product) throw new AppError("Produto não localizado", 404);
 
     if (
       shopItemCart !== undefined &&

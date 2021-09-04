@@ -6,6 +6,7 @@ import {
   ManyToOne,
   PrimaryColumn,
 } from "typeorm";
+import { v4 as uuidV4 } from "uuid";
 
 import { Order } from "./Order";
 
@@ -35,6 +36,12 @@ class OrderItem {
   @ManyToOne(() => Order)
   @JoinColumn({ name: "OrderId" })
   Order!: Order;
+
+  constructor() {
+    if (!this.Id) {
+      this.Id = uuidV4();
+    }
+  }
 }
 
 export { OrderItem };

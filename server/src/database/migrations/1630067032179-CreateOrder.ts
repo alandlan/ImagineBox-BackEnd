@@ -42,6 +42,10 @@ export class CreateOrder1630067032179 implements MigrationInterface {
             type: "varchar",
           },
           {
+            name: "StreetName",
+            type: "varchar",
+          },
+          {
             name: "Number",
             type: "varchar",
           },
