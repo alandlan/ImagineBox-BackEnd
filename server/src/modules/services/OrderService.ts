@@ -46,7 +46,9 @@ class OrderService {
       UserId,
       OrderStatusId,
       ExpectedDate,
-      Price: shopCart.Total,
+      PriceProducts: shopCart.Total,
+      PriceFreight: 1,
+      PriceTotal: shopCart.Total + 1,
       PostalCode: address.PostalCode,
       StreetName: address.StreetName,
       Number: address.Number,
@@ -65,6 +67,7 @@ class OrderService {
       orderItem.Name = item.Product.Name;
       orderItem.Quantity = item.Quantity;
       orderItem.Price = item.Product.Price;
+      orderItem.Total = item.Quantity * item.Product.Price;
 
       orderItens.push(orderItem);
     });

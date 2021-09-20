@@ -1,7 +1,9 @@
 interface ICreateOrderDTO {
   OrderStatusId: number;
   UserId: string;
-  Price: number;
+  PriceProducts: number;
+  PriceFreight: number;
+  PriceTotal: number;
   ExpectedDate: Date;
   PostalCode: string;
   StreetName: string;

@@ -37,6 +37,24 @@ class Product {
   CategoryId!: string;
 
   @Column()
+  Weight!: string;
+
+  @Column()
+  Height!: string;
+
+  @Column()
+  Width!: string;
+
+  @Column()
+  Length!: string;
+
+  @Column()
+  Format!: string;
+
+  @Column()
+  Diameter!: string;
+
+  @Column()
   Img?: string;
 
   @Column()

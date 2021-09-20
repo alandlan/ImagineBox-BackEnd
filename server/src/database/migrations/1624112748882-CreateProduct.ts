@@ -42,6 +42,30 @@ export class CreateProduct1624112748882 implements MigrationInterface {
             isNullable: true,
           },
           {
+            name: "Weight",
+            type: "varchar",
+          },
+          {
+            name: "Height",
+            type: "varchar",
+          },
+          {
+            name: "Width",
+            type: "varchar",
+          },
+          {
+            name: "Length",
+            type: "varchar",
+          },
+          {
+            name: "Format",
+            type: "varchar",
+          },
+          {
+            name: "Diameter",
+            type: "varchar",
+          },
+          {
             name: "Created_at",
             type: "timestamp",
             default: "now()",

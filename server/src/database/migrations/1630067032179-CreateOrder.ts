@@ -25,7 +25,15 @@ export class CreateOrder1630067032179 implements MigrationInterface {
             type: "uuid",
           },
           {
-            name: "Price",
+            name: "PriceProducts",
+            type: "numeric",
+          },
+          {
+            name: "PriceFreight",
+            type: "numeric",
+          },
+          {
+            name: "PriceTotal",
             type: "numeric",
           },
           {

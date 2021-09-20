@@ -22,7 +22,13 @@ class Order {
   UserId!: string;
 
   @Column()
-  Price!: number;
+  PriceProducts!: number;
+
+  @Column()
+  PriceFreight!: number;
+
+  @Column()
+  PriceTotal!: number;
 
   @CreateDateColumn()
   Created_at!: Date;

@@ -30,6 +30,9 @@ class OrderItem {
   @Column()
   Price!: number;
 
+  @Column()
+  Total!: number;
+
   @CreateDateColumn()
   Created_at!: Date;
 
