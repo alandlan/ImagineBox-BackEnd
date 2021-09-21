@@ -10,9 +10,7 @@ class FreightController {
 
     const freightService = container.resolve(FreightService);
 
-    const search = await freightService.FindCep(Cep);
-
-    const endereco: CepResponse = search!;
+    const endereco = await freightService.FindCep(Cep);
 
     return response.status(200).json(endereco);
   }

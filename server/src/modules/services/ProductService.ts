@@ -35,6 +35,9 @@ class ProductService {
   async FindById(id: string): Promise<Product | undefined> {
     const product = await this.productRepository.FindById(id);
 
+    if (product === undefined)
+      throw new AppError("Produto não localizado", 404);
+
     return product;
   }
 

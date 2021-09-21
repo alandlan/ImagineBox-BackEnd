@@ -1,7 +1,8 @@
-import { Response, Request } from "express";
+import { Response, Request, response } from "express";
 import { container } from "tsyringe";
 
 import { AppError } from "../../errors/AppError";
+import { FreightService } from "../services/FreightService";
 import { ProductService } from "../services/ProductService";
 
 class ProductController {
@@ -111,6 +112,27 @@ class ProductController {
     });
 
     return response.status(200).send();
+  }
+
+  async CalculateFreight(
+    request: Request,
+    response: Response
+  ): Promise<Response> {
+    const { id } = request.params;
+    const { cep } = request.body;
+
+    const productService = container.resolve(ProductService);
+
+    const product = await productService.FindById(id);
+
+    const freightService = container.resolve(FreightService);
+
+    const info = await freightService.GetPriceAndDeadLineByProduct(
+      product!,
+      cep
+    );
+
+    return response.status(200).json(info);
   }
 }
 

@@ -8,30 +8,39 @@ import {
 import { Product } from "../models/Product";
 
 class FreightService {
-  async FindCep(cep: string): Promise<CepResponse | void> {
-    return consultarCep(cep).then((response) => {
+  async FindCep(cep: string): Promise<CepResponse> {
+    const retorno: any = consultarCep(cep).then((response) => {
       return response;
     });
+
+    const response: CepResponse = retorno;
+
+    return response;
   }
 
   async GetPriceAndDeadLineByProduct(
-    product: Product
-  ): Promise<PrecoPrazoResponse | void> {
+    product: Product,
+    cep: string
+  ): Promise<PrecoPrazoResponse> {
     const args = {
-      sCepOrigem: "81200100",
-      sCepDestino: "21770200",
-      nVlPeso: "1",
-      nCdFormato: "1",
-      nVlComprimento: "20",
-      nVlAltura: "20",
-      nVlLargura: "20",
+      sCepOrigem: "04814390",
+      sCepDestino: cep,
+      nVlPeso: product.Weight,
+      nCdFormato: product.Format,
+      nVlComprimento: product.Length,
+      nVlAltura: product.Height,
+      nVlLargura: product.Width,
       nCdServico: ["04014", "04510"],
-      nVlDiametro: "0",
+      nVlDiametro: product.Diameter,
     };
 
-    return calcularPrecoPrazo(args).then((response) => {
+    const search: any = await calcularPrecoPrazo(args).then((response) => {
       return response;
     });
+
+    const response: PrecoPrazoResponse = search;
+
+    return response;
   }
 }
 
