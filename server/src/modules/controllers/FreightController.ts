@@ -1,3 +1,4 @@
+import { CepResponse } from "correios-brasil/dist";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 
@@ -9,7 +10,9 @@ class FreightController {
 
     const freightService = container.resolve(FreightService);
 
-    const endereco = await freightService.FindCep(Cep);
+    const search = await freightService.FindCep(Cep);
+
+    const endereco: CepResponse = search!;
 
     return response.status(200).json(endereco);
   }

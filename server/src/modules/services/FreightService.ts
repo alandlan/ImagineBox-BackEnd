@@ -1,24 +1,37 @@
-import { consultarCep } from "correios-brasil";
+import {
+  calcularPrecoPrazo,
+  CepResponse,
+  consultarCep,
+  PrecoPrazoResponse,
+} from "correios-brasil";
 
-import { CepDto } from "../dtos/CepDto";
+import { Product } from "../models/Product";
 
 class FreightService {
-  async FindCep(cep: string): Promise<CepDto> {
-    const endereco = new CepDto();
-
-    await consultarCep(cep).then((response) => {
-      if (response !== undefined) {
-        endereco.cep = response.cep;
-        endereco.logradouro = response.logradouro;
-        endereco.complemento = response.complemento;
-        endereco.bairro = response.bairro;
-        endereco.localidade = response.localidade;
-        endereco.uf = response.uf;
-        endereco.ibge = response.ibge;
-      }
+  async FindCep(cep: string): Promise<CepResponse | void> {
+    return consultarCep(cep).then((response) => {
+      return response;
     });
+  }
 
-    return endereco;
+  async GetPriceAndDeadLineByProduct(
+    product: Product
+  ): Promise<PrecoPrazoResponse | void> {
+    const args = {
+      sCepOrigem: "81200100",
+      sCepDestino: "21770200",
+      nVlPeso: "1",
+      nCdFormato: "1",
+      nVlComprimento: "20",
+      nVlAltura: "20",
+      nVlLargura: "20",
+      nCdServico: ["04014", "04510"],
+      nVlDiametro: "0",
+    };
+
+    return calcularPrecoPrazo(args).then((response) => {
+      return response;
+    });
   }
 }
 
