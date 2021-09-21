@@ -30,7 +30,18 @@ class ProductController {
   }
 
   async Create(request: Request, response: Response): Promise<Response> {
-    const { name, description, price, categoryId } = request.body;
+    const {
+      name,
+      description,
+      price,
+      categoryId,
+      weight,
+      height,
+      width,
+      length,
+      format,
+      diameter,
+    } = request.body;
 
     const productService = container.resolve(ProductService);
 
@@ -39,6 +50,12 @@ class ProductController {
       Description: description,
       Price: price,
       CategoryId: categoryId,
+      Weight: weight,
+      Height: height,
+      Width: width,
+      Length: length,
+      Format: format,
+      Diameter: diameter,
     });
 
     return response.status(201).json(product);
@@ -59,7 +76,19 @@ class ProductController {
   }
 
   async Update(request: Request, response: Response): Promise<Response> {
-    const { id, name, description, price, isActive } = request.body;
+    const {
+      id,
+      name,
+      description,
+      price,
+      isActive,
+      weight,
+      height,
+      width,
+      length,
+      format,
+      diameter,
+    } = request.body;
 
     if (!id) {
       throw new AppError("Faltou informar o Id do Produto!", 404);
@@ -67,7 +96,19 @@ class ProductController {
 
     const productService = container.resolve(ProductService);
 
-    await productService.Update({ id, name, description, price, isActive });
+    await productService.Update({
+      id,
+      name,
+      description,
+      price,
+      isActive,
+      weight,
+      height,
+      width,
+      length,
+      format,
+      diameter,
+    });
 
     return response.status(200).send();
   }

@@ -4,6 +4,7 @@ interface ICreateOrderItemDTO {
   Name: string;
   Quantity: number;
   Price: number;
+  Total: number;
 }
 
 export { ICreateOrderItemDTO };

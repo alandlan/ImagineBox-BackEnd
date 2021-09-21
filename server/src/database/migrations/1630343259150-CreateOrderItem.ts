@@ -37,6 +37,10 @@ export class CreateOrderItem1630343259150 implements MigrationInterface {
             type: "numeric",
           },
           {
+            name: "Total",
+            type: "numeric",
+          },
+          {
             name: "Created_at",
             type: "timestamp",
             default: "now()",

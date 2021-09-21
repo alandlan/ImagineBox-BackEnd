@@ -12,6 +12,12 @@ interface IRequestCreate {
   Description: string;
   Price: number;
   CategoryId: string;
+  Weight: string;
+  Height: string;
+  Width: string;
+  Length: string;
+  Format: string;
+  Diameter: string;
 }
 
 interface IRequestAddImage {
@@ -42,6 +48,12 @@ class ProductService {
     Description,
     Price,
     CategoryId,
+    Weight,
+    Height,
+    Width,
+    Length,
+    Format,
+    Diameter,
   }: IRequestCreate): Promise<Product> {
     if (Name.length < 4 || Description.length < 4 || Price <= 0) {
       throw new AppError("Produto inválido!", 500);
@@ -52,6 +64,12 @@ class ProductService {
       Description,
       Price,
       CategoryId,
+      Weight,
+      Height,
+      Width,
+      Length,
+      Format,
+      Diameter,
     });
 
     return product;
@@ -79,6 +97,12 @@ class ProductService {
     description,
     price,
     isActive,
+    weight,
+    height,
+    width,
+    length,
+    format,
+    diameter,
   }: IUpdateProductDto): Promise<void> {
     const product = await this.productRepository.FindById(id);
 
@@ -90,6 +114,12 @@ class ProductService {
     product.Description = description;
     product.Price = price;
     product.IsActive = isActive;
+    product.Weight = weight;
+    product.Height = height;
+    product.Width = width;
+    product.Length = length;
+    product.Format = format;
+    product.Diameter = diameter;
 
     await this.productRepository.Create(product);
   }

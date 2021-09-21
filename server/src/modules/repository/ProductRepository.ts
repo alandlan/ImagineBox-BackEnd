@@ -1,4 +1,4 @@
-import { getRepository, Raw, Repository } from "typeorm";
+import { getRepository, Repository } from "typeorm";
 
 import { ICreateProductDTO } from "../dtos/ICreateProductDto";
 import { Product } from "../models/Product";
@@ -31,6 +31,7 @@ class ProductRepository implements IProductRepository {
 
     return products;
   }
+
   async FindAll(): Promise<Product[]> {
     const products = await this.repository.find({ relations: ["Category"] });
     return products;
@@ -47,6 +48,12 @@ class ProductRepository implements IProductRepository {
     Price,
     CategoryId,
     Img,
+    Weight,
+    Width,
+    Height,
+    Length,
+    Diameter,
+    Format,
     Id,
     IsActive,
   }: ICreateProductDTO): Promise<Product> {
@@ -56,6 +63,12 @@ class ProductRepository implements IProductRepository {
       Price,
       CategoryId,
       Img,
+      Weight,
+      Width,
+      Height,
+      Length,
+      Diameter,
+      Format,
       Id,
       IsActive,
     });
