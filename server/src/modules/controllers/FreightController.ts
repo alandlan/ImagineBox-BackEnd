@@ -1,3 +1,4 @@
+import { CepResponse } from "correios-brasil/dist";
 import { Request, Response } from "express";
 import { container } from "tsyringe";
 

@@ -15,6 +15,8 @@ productRouter.get("/", productController.FindByName);
 
 productRouter.get("/:id", productController.FindById);
 
+productRouter.get("/CalculeFreight/:id", productController.CalculateFreight);
+
 productRouter.post(
   "/",
   ensureAuthenticated,
